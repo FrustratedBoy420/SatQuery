@@ -1,0 +1,289 @@
+{
+  "query": "How many bridges are visible in the image?",
+  "answer": "I am not sufficiently confident to answer that from this imagery. Every measurement fell below the confidence threshold, so no claim is being made.",
+  "refused": false,
+  "abstained": true,
+  "confidence": 0.0,
+  "task": "single_vqa",
+  "tools": [
+    "rs_vqa"
+  ],
+  "params": {
+    "threshold": 0.45
+  },
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.0,
+    "abstain": true,
+    "count": 2,
+    "passing": 0,
+    "items": [
+      {
+        "claim": "M1 answer",
+        "value": "2",
+        "unit": "",
+        "confidence": 0.438,
+        "modality": "optical",
+        "source_model": "m1-rs-vqa-r2",
+        "source_version": "precomputed",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "served precomputed"
+        ],
+        "conflicts": [
+          "The optical/sar pair is misaligned by 43642.9 px, above the 2 px tolerance; boundaries of detected regions are less reliable than the confidence alone suggests."
+        ],
+        "method": "M1 \u2014 QLoRA-adapted Qwen2-VL-7B (precomputed)"
+      },
+      {
+        "claim": "nothing countable named in the question",
+        "value": null,
+        "unit": "",
+        "confidence": 0.0,
+        "modality": "derived",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "vocabulary: water, vegetation, built, bare"
+        ],
+        "conflicts": [
+          "The optical/sar pair is misaligned by 43642.9 px, above the 2 px tolerance; boundaries of detected regions are less reliable than the confidence alone suggests."
+        ],
+        "method": ""
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": []
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "2 raster(s) \u00b7 optical_sar",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 3,
+            "gsd_m": 217.42,
+            "georeferenced": false
+          },
+          {
+            "role": "sar",
+            "sensor": "sar",
+            "crs": "EPSG:4326",
+            "bands": 2,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "single_vqa \u00b7 matched /how many/",
+      "ok": true,
+      "ms": 0.2,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "optical_sar satisfies rs_vqa",
+      "ok": true,
+      "ms": 0.2,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "rs_vqa (adapter_A_rs_general)",
+      "ok": true,
+      "ms": 0.2,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.45",
+      "ok": true,
+      "ms": 0.2,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Co-registration checked",
+      "detail": "optical/sar \u00b7 offset 43642.88 px (tolerance 2 px)",
+      "ok": false,
+      "ms": 43.7,
+      "data": {
+        "offset_px": 43642.88,
+        "geometric_px": 43642.88,
+        "phase_px": 204.978,
+        "same_crs": true,
+        "same_shape": true
+      }
+    },
+    {
+      "step": "Executed rs_vqa",
+      "detail": "2 evidence item(s) \u00b7 path neural+classical \u00b7 M1 precomputed",
+      "ok": true,
+      "ms": 54.2,
+      "data": {
+        "items": [
+          {
+            "claim": "M1 answer",
+            "value": "2",
+            "confidence": 0.738,
+            "modality": "optical"
+          },
+          {
+            "claim": "nothing countable named in the question",
+            "value": null,
+            "confidence": 0.0,
+            "modality": "derived"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Co-registration penalty",
+      "detail": "every record lowered by 0.30",
+      "ok": false,
+      "ms": 54.2,
+      "data": {
+        "penalty": 0.3,
+        "offset_px": 43642.88
+      }
+    },
+    {
+      "step": "Conflicts recorded",
+      "detail": "2 \u2014 confidence reduced",
+      "ok": true,
+      "ms": 54.2,
+      "data": {
+        "conflicts": [
+          "The optical/sar pair is misaligned by 43642.9 px, above the 2 px tolerance; boundaries of detected regions are less reliable than the confidence alone suggests.",
+          "The optical/sar pair is misaligned by 43642.9 px, above the 2 px tolerance; boundaries of detected regions are less reliable than the confidence alone suggests."
+        ]
+      }
+    },
+    {
+      "step": "Confidence gate",
+      "detail": "nothing cleared 0.45 \u2014 abstaining",
+      "ok": false,
+      "ms": 54.2,
+      "data": {}
+    }
+  ],
+  "manifest": {
+    "modality": "optical_sar",
+    "count": 2,
+    "rasters": [
+      {
+        "source": "source.png",
+        "sensor": "optical",
+        "bands": 3,
+        "band_names": [
+          "red",
+          "green",
+          "blue"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": false,
+        "geotransform": [
+          0.0,
+          0.001953125,
+          0.0,
+          0.0,
+          0.0,
+          -0.001953125
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 217.42,
+        "bounds": [
+          0.0,
+          -1.0,
+          1.0,
+          0.0
+        ],
+        "centre": [
+          -0.5,
+          0.5
+        ],
+        "acquired": "",
+        "role": "optical"
+      },
+      {
+        "source": "kharagpur_sar.tif",
+        "sensor": "sar",
+        "bands": 2,
+        "band_names": [
+          "vv",
+          "vh"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-1 GRD (synthetic)",
+        "looks": 4,
+        "polarisation": "VV+VH",
+        "role": "sar"
+      }
+    ],
+    "georeferenced": false,
+    "sensors": [
+      "optical",
+      "sar"
+    ]
+  },
+  "elapsed_ms": 54.4,
+  "version": "0.4.0",
+  "engine": "neural+classical",
+  "run_id": "run-20260923T071246-520a85",
+  "created": "2026-09-23T07:12:46Z",
+  "precomputed": true
+}

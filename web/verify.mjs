@@ -1,0 +1,536 @@
+/**
+ * Headless UI verification — drives the built app in a real browser.
+ *
+ *   npm run build && npx vite preview --port 4173 &
+ *   node verify.mjs [baseUrl] [fixturesDir]
+ *
+ * Anchored to data-testid, never to styling classes (NFR-16). Runs against
+ * whichever engine the page selects: a static preview needs no backend; a
+ * page served by `satquery serve` uses the API, and then M1's palette is
+ * checked too when M1 serves pre-computed answers. Covers: landing loads,
+ * upload works (and fails loudly), query answers, trace populates, refusal
+ * and abstention are visible, exports download, deep links survive refresh,
+ * reduced motion, no WebGL, phone width, and zero console errors (NFR-12).
+ */
+
+import { chromium } from 'playwright'
+import { mkdirSync, writeFileSync, existsSync } from 'node:fs'
+import path from 'node:path'
+
+const BASE = process.argv[2] ?? 'http://127.0.0.1:4173'
+const FIX = process.argv[3] ?? 'fixtures'
+const SHOTS = 'shots'
+mkdirSync(SHOTS, { recursive: true })
+
+const results = []
+const pass = (n, d = '') => results.push({ ok: true, n, d })
+const fail = (n, d = '') => results.push({ ok: false, n, d })
+const check = async (name, fn) => {
+  try { const d = await fn(); pass(name, d ?? '') } catch (e) { fail(name, String(e.message ?? e).split('\n')[0].slice(0, 160)) }
+}
+const tid = (id) => `[data-testid="${id}"]`
+
+const browser = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] })
+const consoleErrors = [], pageErrors = []
+const watch = (page) => {
+  page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(`${page.url()} :: ${m.text()}`) })
+  page.on('pageerror', (e) => pageErrors.push(`${page.url()} :: ${e.message}`))
+}
+
+const ctx = await browser.newContext({ viewport: { width: 1600, height: 940 }, acceptDownloads: true })
+const page = await ctx.newPage()
+watch(page)
+
+try {
+  /* ------------------------------------------------------------ landing */
+  await check('landing loads', async () => {
+    const r = await page.goto(BASE, { waitUntil: 'domcontentloaded' })
+    if (r?.status() !== 200) throw new Error(`HTTP ${r?.status()}`)
+    return 'HTTP 200'
+  })
+  await check('title', async () => { const t = await page.title(); if (!t.includes('SatQuery')) throw new Error(t); return t })
+  await check('disclosure permanent', async () => { await page.locator(tid('disclosure')).waitFor(); return (await page.locator(tid('disclosure')).innerText()).slice(0, 60) })
+  await check('engine badge', async () => (await page.locator(tid('engine-badge')).innerText()).replace(/\s+/g, ' '))
+  await check('hero telemetry measured', async () => {
+    await page.locator(tid('telemetry')).waitFor({ timeout: 30000 })
+    // measured, not placeholder: every readout filled from the scene's pixels
+    await page.waitForFunction(() => !document.querySelector('[data-testid="telemetry"]')?.textContent?.includes('…'), null, { timeout: 30000 })
+    return (await page.locator(tid('telemetry')).innerText()).replace(/\s+/g, ' ').slice(0, 90)
+  })
+  await page.screenshot({ path: `${SHOTS}/01-hero.png` })
+
+  await check('hero globe renders', async () => {
+    await page.locator(`${tid('globe')} canvas, ${tid('globe-fallback')} canvas`).first().waitFor({ timeout: 15000 })
+    return (await page.locator('h1').first().innerText()).replace(/\s+/g, ' ')
+  })
+
+  await check('ask cards deep-link into the workstation', async () => {
+    const hrefs = await page.locator(`${tid('ask-cards')} a`).evaluateAll((as) => as.map((a) => a.getAttribute('href')))
+    if (hrefs.length !== 4 || !hrefs.every((h) => /^\/workstation\?scene=\w+&q=/.test(h))) throw new Error(hrefs.join(' '))
+    return `${hrefs.length} cards`
+  })
+
+  await check('pipeline steps', async () => {
+    const sec = page.locator(tid('pipeline'))
+    await sec.scrollIntoViewIfNeeded()
+    const tabs = sec.getByRole('tab')
+    for (let i = 0; i < 6; i++) {
+      await tabs.nth(i).click()
+      await page.waitForTimeout(900)
+      await sec.screenshot({ path: `${SHOTS}/03-pipeline-${i + 1}.png` })
+    }
+    return (await sec.locator('[role=tab][aria-selected=true]').innerText()).replace(/\s+/g, ' ')
+  })
+
+  await check('refusal replay', async () => {
+    const sec = page.locator(tid('refusal-replay'))
+    await sec.scrollIntoViewIfNeeded()
+    await sec.getByText('Refused · no model invoked').waitFor({ timeout: 8000 })
+    await page.waitForTimeout(1800)
+    await page.screenshot({ path: `${SHOTS}/04-refusal-replay.png` })
+    return 'compatibility failed, remedy shown'
+  })
+  await check('numbers band', async () => {
+    const sec = page.locator(tid('numbers'))
+    await sec.scrollIntoViewIfNeeded()
+    await page.waitForTimeout(2200)
+    await page.screenshot({ path: `${SHOTS}/05-numbers.png` })
+    const t = await sec.innerText()
+    if (!t.includes('XX.X')) throw new Error('pending placeholders missing')
+    return 'XX.X pending + measured values'
+  })
+  await page.screenshot({ path: `${SHOTS}/06-landing-full.png`, fullPage: false })
+
+  /* -------------------------------------------------------- workstation */
+  await check('nav → workstation', async () => {
+    await page.locator('nav a', { hasText: 'Workstation' }).click()
+    await page.locator(tid('workstation')).waitFor()
+    await page.locator(tid('slot-optical')).getByText('built-in · Sentinel').waitFor({ timeout: 20000 })
+    return page.url()
+  })
+  await check('metadata shown for every raster', async () => {
+    const t = await page.locator(tid('slot-sar')).innerText()
+    for (const k of ['EPSG:32644', 'GSD', 'vv, vh', 'Sentinel-1A']) if (!t.includes(k)) throw new Error(`missing ${k}`)
+    return 'CRS · bands · GSD · sensor · acquired'
+  })
+
+  const ask = async (q) => {
+    await page.locator(tid('query-input')).fill(q)
+    await page.locator(tid('query-submit')).click()
+    await page.waitForFunction(() => !document.querySelector('[data-testid="query-submit"]')?.hasAttribute('disabled'))
+    await page.waitForTimeout(1600)
+  }
+
+  await check('RQ-4 answers with evidence', async () => {
+    await ask('Use the optical and SAR images together to identify built-up and water-covered regions.')
+    await page.locator(tid('answer')).waitFor()
+    const n = await page.locator(tid('evidence-item')).count()
+    if (n < 4) throw new Error(`${n} items`)
+    return (await page.locator(tid('answer-text')).innerText()).slice(0, 90)
+  })
+  await check('trace populated', async () => {
+    const n = await page.locator(tid('trace-step')).count()
+    if (n < 7) throw new Error(`${n} steps`)
+    return `${n} steps`
+  })
+  await check('evidence drawn on the plate', async () => {
+    const n = await page.locator(tid('evidence-box')).count()
+    if (!n) throw new Error('no boxes')
+    return `${n} boxes`
+  })
+  await page.screenshot({ path: `${SHOTS}/10-ws-crossmodal.png` })
+
+  await check('refusal visible, no model invoked', async () => {
+    await ask('What changed between these two dates?')
+    await page.locator(tid('refusal')).waitFor()
+    const failed = await page.locator(`${tid('trace-step')}[data-ok="false"]`).count()
+    if (failed < 2) throw new Error(`${failed} failed steps`)
+    const steps = await page.locator(tid('trace-step')).allInnerTexts()
+    if (steps.some((s) => s.includes('Executed'))) throw new Error('a tool executed')
+    return `${failed} failed steps, nothing executed`
+  })
+  await page.screenshot({ path: `${SHOTS}/11-ws-refusal.png` })
+
+  await check('remedy loads T1/T2 and re-asks', async () => {
+    await page.getByRole('button', { name: /bi-temporal pair and re-ask/ }).click()
+    await page.locator(tid('answer')).waitFor({ timeout: 20000 })
+    await page.waitForTimeout(1500)
+    return (await page.locator(tid('answer-text')).innerText()).slice(0, 90)
+  })
+  await page.screenshot({ path: `${SHOTS}/12-ws-change.png` })
+
+  await check('abstention visible and distinct', async () => {
+    await ask('Highlight the unicorn.')
+    await page.locator(tid('abstention')).waitFor()
+    return 'abstained'
+  })
+
+  await check('command palette runs RQ-2', async () => {
+    await page.keyboard.press('Control+k')
+    await page.getByRole('dialog').waitFor()
+    await page.screenshot({ path: `${SHOTS}/13-ws-palette.png` })
+    await page.getByRole('option', { name: /Highlight the water body/ }).click()
+    await page.locator(tid('answer')).waitFor()
+    await page.waitForTimeout(1200)
+    return (await page.locator(tid('answer-text')).innerText()).slice(0, 80)
+  })
+
+  await check('GeoJSON downloads', async () => {
+    const [dl] = await Promise.all([page.waitForEvent('download'), page.locator(tid('export-geojson')).click()])
+    const p = path.join(SHOTS, dl.suggestedFilename()); await dl.saveAs(p)
+    const j = JSON.parse((await import('node:fs')).readFileSync(p, 'utf8'))
+    if (j.type !== 'FeatureCollection' || !j.features.length) throw new Error('empty')
+    return `${j.features.length} features, ${j.crs.properties.name}`
+  })
+
+  await check('stack view renders WebGL', async () => {
+    await page.locator(tid('demo-crossmodal')).click()
+    await page.waitForTimeout(1500)
+    await page.locator(tid('view-stack')).click()
+    await page.locator(`${tid('stack')} canvas`).waitFor({ timeout: 15000 })
+    await page.locator(tid('separation')).fill('0.95')
+    await page.waitForTimeout(1600)
+    await page.screenshot({ path: `${SHOTS}/14-ws-stack.png` })
+    const gl = await page.evaluate(() => { const c = document.querySelector('[data-testid="stack"] canvas'); return c ? `${c.width}x${c.height}` : null })
+    if (!gl) throw new Error('no canvas')
+    return gl
+  })
+  await check('compare view', async () => {
+    await page.locator(tid('view-compare')).click()
+    await page.locator(tid('compare')).waitFor()
+    await page.screenshot({ path: `${SHOTS}/15-ws-compare.png` })
+    return 'optical ↔ SAR'
+  })
+  await page.locator(tid('view-map')).click()
+
+  /* ------------------------------------------------------------ uploads */
+  // Fixtures dir first; otherwise the built-in T2 scene, which is itself a real
+  // Sentinel-2 L2A GeoTIFF in EPSG:32644 — uploaded through the upload path.
+  const gt = [path.join(FIX, 'optical_utm.tif'), 'public/scenes/t2.tif'].find((f) => existsSync(f)) ?? path.join(FIX, 'optical_utm.tif')
+  if (existsSync(gt)) {
+    await check('upload a real GeoTIFF (UTM) as optical', async () => {
+      await page.locator(tid('file-optical')).setInputFiles(gt)
+      await page.locator(tid('slot-optical')).getByText('uploaded').waitFor({ timeout: 20000 })
+      const t = await page.locator(tid('slot-optical')).innerText()
+      if (!t.includes('EPSG:32644')) throw new Error(t.slice(0, 120))
+      return t.match(/Centre.*$/m)?.[0] ?? 'EPSG:32644'
+    })
+    await check('uploaded file routes like a built-in', async () => {
+      await ask('Highlight the water body')
+      await page.locator(tid('answer')).waitFor()
+      const text = await page.locator(tid('answer-text')).innerText()
+      // An answer appearing is not the test; a possible answer is. This check
+      // once passed on "covering 48948962480.00 ha" for a 164 ha UTM image,
+      // because it only looked for text. No area may exceed the footprint.
+      const ha = [...text.matchAll(/([\d,]+(?:\.\d+)?)\s*ha\b/g)].map((m) => parseFloat(m[1].replace(/,/g, '')))
+      const footprint = 128 * 128 * 100 / 10_000          // fixture: 128 px at 10 m
+      const over = ha.filter((v) => v > footprint)
+      if (over.length) throw new Error(`area ${over[0]} ha exceeds the ${footprint} ha image: ${text.slice(0, 80)}`)
+      return text.slice(0, 90)
+    })
+    await page.screenshot({ path: `${SHOTS}/16-ws-upload.png` })
+  } else fail('upload a real GeoTIFF (UTM) as optical', `fixture missing: ${gt}`)
+
+  const bad = existsSync(path.join(FIX, 'not_a_tiff.tif')) ? path.join(FIX, 'not_a_tiff.tif') : path.join(SHOTS, 'not_a_tiff.tif')
+  if (!existsSync(bad)) writeFileSync(bad, 'this is plain text with a .tif extension')
+  if (existsSync(bad)) {
+    await check('malformed file gives a readable error', async () => {
+      await page.locator(tid('file-sar')).setInputFiles(bad)
+      const t = await page.locator(tid('upload-error-sar')).innerText({ timeout: 10000 })
+      return t.replace(/\s+/g, ' ').slice(0, 100)
+    })
+  }
+  // any PNG is non-georeferenced benchmark imagery; a screenshot taken above will do
+  const png = [path.join(FIX, 'benchmark.png'), path.join(SHOTS, '01-hero.png')].find((f) => existsSync(f)) ?? path.join(FIX, 'benchmark.png')
+  if (existsSync(png)) {
+    await check('PNG accepted as non-georeferenced benchmark imagery', async () => {
+      await page.locator(tid('file-t1')).setInputFiles(png)
+      await page.locator(tid('slot-t1')).getByText('not georeferenced').waitFor({ timeout: 10000 })
+      return 'CRS none, pixel coordinates'
+    })
+  }
+
+  /* ------------------------------------------------------------------ M1 */
+  // Only against a live server serving M1's pre-computed answers
+  // (satquery serve --adapters models/adapters). A real VRSBench photo is one
+  // of the images M1 holds answers for; the palette must offer those
+  // questions, and picking one must be answered by M1, not the classical path.
+  const health = await fetch(`${BASE}/api/health`).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+  const m1 = Object.values(health?.packs ?? {}).some((p) => p.mode === 'precomputed')
+  const photo = '../demo/real_vrsbench/08281_0000.png'
+  if (m1 && existsSync(photo)) {
+    await check('palette offers M1\'s questions for a known image', async () => {
+      await page.locator(tid('file-optical')).setInputFiles(photo)
+      await page.locator(tid('slot-optical')).getByText('uploaded').waitFor({ timeout: 20000 })
+      await page.waitForTimeout(800)
+      await page.keyboard.press('Control+k')
+      await page.getByText('M1 has answers for this image').waitFor({ timeout: 5000 })
+      return `${await page.getByText('answered by M1 · pre-computed').count()} question(s)`
+    })
+    await check('a palette question is answered by M1, pre-computed', async () => {
+      const q = 'How many bridges are visible in the image?'
+      await page.getByText(q, { exact: true }).click()
+      await page.locator(tid('answer')).waitFor({ timeout: 20000 })
+      await page.waitForFunction(() => !document.querySelector('[data-testid="query-submit"]')?.hasAttribute('disabled'), null, { timeout: 20000 })
+      await page.waitForTimeout(1500)
+      if (!(await page.locator('body').innerText()).includes('M1 precomputed')) throw new Error('trace does not name M1 precomputed')
+      await page.screenshot({ path: `${SHOTS}/18-m1-palette.png` })
+      return (await page.locator(tid('answer-text')).innerText()).trim().slice(0, 80)
+    })
+  }
+
+  /* ------------------------------------------------------------- report */
+  let reportUrl = ''
+  await check('report view', async () => {
+    await page.locator(tid('export-report')).click()
+    await page.locator(tid('report')).waitFor()
+    await page.locator(tid('cannot-establish')).waitFor()
+    reportUrl = page.url()
+    await page.screenshot({ path: `${SHOTS}/17-report.png`, fullPage: true })
+    return reportUrl.replace(BASE, '')
+  })
+  await check('report downloads and stands alone', async () => {
+    const [dl] = await Promise.all([page.waitForEvent('download'), page.locator(tid('download-report')).click()])
+    const p = path.join(SHOTS, dl.suggestedFilename()); await dl.saveAs(p)
+    const html = (await import('node:fs')).readFileSync(p, 'utf8')
+    if (/<script|<link /.test(html)) throw new Error('external or scripted content')
+    if (!html.includes('What this cannot establish')) throw new Error('section missing')
+    return `${Math.round(html.length / 1024)} kB, no external refs`
+  })
+  await check('report deep link survives refresh', async () => {
+    await page.reload({ waitUntil: 'domcontentloaded' })
+    await page.locator(tid('report')).waitFor()
+    return 'ok'
+  })
+
+  /* ------------------------------------------------------- other pages */
+  await check('data & models', async () => {
+    await page.goto(`${BASE}/data`)
+    await page.locator(tid('dataset-row')).first().waitFor()
+    const d = await page.locator(tid('dataset-row')).count(), m = await page.locator(tid('model-row')).count()
+    if (d !== 5 || m !== 7) throw new Error(`${d} datasets, ${m} models`)
+    const t = await page.locator('body').innerText()
+    if (!t.includes('464,044') || /9\.6 ?M images/i.test(t)) throw new Error('DAT-01 wording')
+    await page.waitForTimeout(800)
+    await page.screenshot({ path: `${SHOTS}/20-data.png`, fullPage: true })
+    return `${d} datasets · ${m} models · ${(await page.locator(tid('serving-now')).innerText())}`
+  })
+  await check('results (deep link)', async () => {
+    const r = await page.goto(`${BASE}/results`)
+    if (r?.status() !== 200) throw new Error(`HTTP ${r?.status()}`)
+    await page.locator(tid('formula')).getByText('capability').waitFor({ timeout: 20000 })
+    await page.waitForTimeout(1500)
+    await page.screenshot({ path: `${SHOTS}/21-results.png`, fullPage: true })
+    return (await page.locator(tid('formula')).innerText()).slice(0, 80)
+  })
+  if (health) {
+    await check('results: M1 calibration beside the pipeline\'s', async () => {
+      const t = await page.locator(tid('m1-calibration')).innerText({ timeout: 10000 })
+      const bins = await page.locator(`${tid('chart-m1-calibration')} circle`).count()
+      if (bins < 3) throw new Error(`${bins} reliability bins drawn`)
+      return `${bins} bins · ${t.match(/withholds[^.]*/)?.[0] ?? ''}`.slice(0, 100)
+    })
+  }
+  await check('unknown route shows 404 page', async () => {
+    await page.goto(`${BASE}/nowhere`)
+    await page.getByText('No data').waitFor()
+    return 'ok'
+  })
+} catch (e) {
+  fail('harness', e.message)
+}
+
+/* ------------------------------------------------------ reduced motion */
+{
+  const c = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' })
+  const p = await c.newPage(); watch(p)
+  await check('reduced motion: landing and workstation work', async () => {
+    await p.goto(BASE)
+    await p.locator(tid('telemetry')).waitFor({ timeout: 30000 })
+    await p.screenshot({ path: `${SHOTS}/30-reduced-motion.png` })
+    await p.goto(`${BASE}/workstation?q=${encodeURIComponent('How many built-up areas are visible?')}`)
+    await p.locator(tid('answer')).waitFor({ timeout: 20000 })
+    return 'instant transitions, answer via deep link'
+  })
+  await c.close()
+}
+
+/* ------------------------------------------------------------ no WebGL */
+{
+  const c = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+  const p = await c.newPage(); watch(p)
+  await check('no WebGL: stack degrades to 2D', async () => {
+    await p.goto(`${BASE}/workstation?nowebgl`)
+    await p.locator(tid('slot-sar')).getByText('built-in · Sentinel').waitFor({ timeout: 20000 })
+    await p.locator(tid('view-stack')).click()
+    await p.locator(tid('stack-fallback')).waitFor({ timeout: 10000 })
+    await p.screenshot({ path: `${SHOTS}/31-no-webgl.png` })
+    return '2D panels'
+  })
+  await c.close()
+}
+
+/* --------------------------------------------------------- sample photos */
+// A fresh page: loading a photo replaces the built-in scene the earlier checks use.
+{
+  const c = await browser.newContext({ viewport: { width: 1600, height: 940 } })
+  const p = await c.newPage(); watch(p)
+  await p.goto(BASE + '/workstation')
+  await p.locator(tid('samples')).waitFor({ timeout: 30000 })
+  await check('sample photos: eight thumbnails, all load', async () => {
+    const n = await p.locator('[data-testid^="sample-"]').count()
+    if (n !== 8) throw new Error(`${n} photos`)
+    await p.waitForFunction(() => [...document.querySelectorAll('[data-testid^="sample-"] img')].every((i) => i.complete && i.naturalWidth > 0), null, { timeout: 20000 })
+    return `${n} photos`
+  })
+  await check('sample photos: a click loads Optical and suggests the question, even during the first load', async () => {
+    // immediately, while the default scene is still loading: the default must not land on top
+    await p.locator(tid('sample-08281_0000')).click()
+    await p.locator(tid('slot-optical')).getByText('08281_0000.png').first().waitFor({ timeout: 30000 })
+    await p.waitForTimeout(6000)                       // let the default scene finish in the background
+    const optical = await p.locator(tid('slot-optical')).innerText()
+    if (!optical.includes('08281_0000.png')) throw new Error('the default scene replaced the chosen photo')
+    // a recommendation, not a prefill: the box stays empty, the question is only the placeholder
+    const [val, ph] = await p.locator(tid('query-input')).evaluate((el) => [el.value, el.placeholder])
+    if (val !== '') throw new Error(`the box was pre-filled: ${JSON.stringify(val)}`)
+    if (!/bridges/i.test(ph)) throw new Error(`placeholder is ${JSON.stringify(ph)}`)
+    return ph
+  })
+  await check('query bar: typing offers matching example questions, and picking one fills the box', async () => {
+    await p.locator(tid('query-input')).fill('')
+    await p.locator(tid('query-input')).type('built', { delay: 20 })
+    await p.locator(tid('query-suggestions')).waitFor({ timeout: 5000 })
+    const n = await p.locator(`${tid('query-suggestions')} button`).count()
+    if (n < 2) throw new Error(`${n} matches for "built"`)
+    await p.locator(`${tid('query-suggestions')} button`, { hasText: 'How many built-up areas' }).click()
+    const filled = await p.locator(tid('query-input')).inputValue()
+    if (!/built-up areas/.test(filled)) throw new Error(`box holds ${JSON.stringify(filled)}`)
+    if (await p.locator(tid('query-suggestions')).count()) throw new Error('dropdown stayed open after a pick')
+    return `${n} matches, picked one`
+  })
+  await check('sample photos: the upload button loads a file into Optical', async () => {
+    await p.locator(tid('file-own')).setInputFiles(path.join('public', 'samples', '09054_0000.png'))
+    await p.locator(tid('slot-optical')).getByText('09054_0000.png').first().waitFor({ timeout: 30000 })
+    return 'ok'
+  })
+  await check('empty question is not sent', async () => {
+    await p.locator(tid('query-input')).fill('  ')
+    await p.locator(tid('query-submit')).click()
+    await p.locator('[role="alert"]').filter({ hasText: 'Type a question first' }).waitFor({ timeout: 5000 })
+    return 'asks for a question'
+  })
+  await c.close()
+}
+
+/* ----------------------------------------------------------- start dialog */
+// The homepage's entry point: a choice (scene / image), not a jump straight
+// to a page. Each own context, so a picked photo never bleeds into another
+// check's workstation state.
+{
+  const c = await browser.newContext({ viewport: { width: 1600, height: 940 } })
+  const p = await c.newPage(); watch(p)
+  await p.goto(BASE)
+  await p.locator(tid('hero-cta')).waitFor({ timeout: 30000 })
+  await check('start dialog: the hero CTA says Workstation and opens it, Load scene active by default', async () => {
+    const label = await p.locator(tid('hero-cta')).innerText()
+    if (!/workstation/i.test(label)) throw new Error(`hero CTA reads ${JSON.stringify(label)}`)
+    await p.locator(tid('hero-cta')).click()
+    await p.locator(tid('start-dialog')).waitFor({ timeout: 10000 })
+    const selected = await p.locator(tid('start-tab-scene')).getAttribute('aria-selected')
+    if (selected !== 'true') throw new Error('Load scene is not the default tab')
+    await p.locator(tid('start-scene-crossmodal')).waitFor({ timeout: 5000 })
+    return label
+  })
+  await check('start dialog: no claim that M1 handles the library well', async () => {
+    const text = await p.locator(tid('start-dialog')).innerText()
+    if (/answers well|handles.*well/i.test(text)) throw new Error('dialog still claims M1 answers these well')
+    return 'no such claim'
+  })
+  await check('start dialog: Escape closes it', async () => {
+    await p.keyboard.press('Escape')
+    await p.locator(tid('start-dialog')).waitFor({ state: 'detached', timeout: 5000 })
+    return 'closed'
+  })
+  await check('start dialog: a scene card (optical only) deep-links the workstation to that scene', async () => {
+    await p.locator(tid('hero-cta')).click()
+    await p.locator(tid('start-scene-optical')).click()
+    await p.locator(tid('workstation')).waitFor({ timeout: 20000 })
+    if (!/scene=optical/.test(p.url())) throw new Error(`URL is ${p.url()}`)
+    await p.locator(tid('slot-optical')).getByText('built-in').first().waitFor({ timeout: 30000 })
+    const sar = await p.locator(tid('slot-sar')).innerText()
+    if (!/empty/i.test(sar)) throw new Error('SAR should stay empty for the optical-only scene')
+    return p.url()
+  })
+  await check('start dialog: Load image tab shows the sample library and an upload button', async () => {
+    await p.goto(BASE)
+    await p.locator(tid('hero-cta')).waitFor({ timeout: 30000 })
+    await p.locator(tid('hero-cta')).click()
+    await p.locator(tid('start-tab-image')).click()
+    const n = await p.locator('[data-testid^="start-sample-"]').count()
+    if (n !== 8) throw new Error(`${n} sample photos`)
+    await p.locator(tid('start-upload')).waitFor({ timeout: 5000 })
+    return `${n} photos + upload button`
+  })
+  await check('start dialog: picking a library photo opens the workstation with it loaded', async () => {
+    await p.locator(tid('start-sample-08281_0000')).click()
+    await p.locator(tid('workstation')).waitFor({ timeout: 20000 })
+    await p.locator(tid('slot-optical')).getByText('08281_0000.png').first().waitFor({ timeout: 30000 })
+    const [val, ph] = await p.locator(tid('query-input')).evaluate((el) => [el.value, el.placeholder])
+    if (val !== '') throw new Error(`box pre-filled: ${JSON.stringify(val)}`)
+    if (!/bridges/i.test(ph)) throw new Error(`placeholder is ${JSON.stringify(ph)}`)
+    return ph
+  })
+  await check('start dialog: uploading a file opens the workstation with it loaded', async () => {
+    await p.goto(BASE)
+    await p.locator(tid('hero-cta')).waitFor({ timeout: 30000 })
+    await p.locator(tid('hero-cta')).click()
+    await p.locator(tid('start-tab-image')).click()
+    await p.locator(tid('start-upload-input')).setInputFiles(path.join('public', 'samples', '09054_0000.png'))
+    await p.locator(tid('workstation')).waitFor({ timeout: 20000 })
+    await p.locator(tid('slot-optical')).getByText('09054_0000.png').first().waitFor({ timeout: 30000 })
+    return 'ok'
+  })
+  await check('start dialog: the masthead CTA on another page opens the same dialog', async () => {
+    await p.goto(BASE + '/results')
+    await p.locator(tid('nav-report')).waitFor({ timeout: 20000 })
+    const cta = p.locator('header button', { hasText: 'Workstation' })
+    await cta.waitFor({ timeout: 10000 })
+    await cta.click()
+    await p.locator(tid('start-scene-crossmodal')).waitFor({ timeout: 10000 })
+    return 'ok'
+  })
+  await c.close()
+}
+
+/* ---------------------------------------------------------- phone width */
+{
+  const c = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true })
+  const p = await c.newPage(); watch(p)
+  for (const [route, shot] of [['/', '40-phone-landing'], ['/workstation', '41-phone-workstation'], ['/results', '42-phone-results']]) {
+    await check(`phone width: ${route} has no horizontal scroll`, async () => {
+      await p.goto(BASE + route)
+      await p.waitForTimeout(3500)
+      await p.screenshot({ path: `${SHOTS}/${shot}.png` })
+      const [sw, iw] = await p.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth])
+      if (sw > iw + 1) throw new Error(`scrollWidth ${sw} > ${iw}`)
+      return `${sw} ≤ ${iw}`
+    })
+  }
+  await c.close()
+}
+
+/* -------------------------------------------------------------- errors */
+const ignorable = (t) => t.includes('Download the React DevTools')
+const realConsole = consoleErrors.filter((t) => !ignorable(t))
+if (realConsole.length === 0) pass('no console errors')
+else fail('no console errors', realConsole.slice(0, 4).join(' | '))
+if (pageErrors.length === 0) pass('no uncaught exceptions')
+else fail('no uncaught exceptions', pageErrors.slice(0, 4).join(' | '))
+
+await browser.close()
+
+const ok = results.filter((r) => r.ok).length
+for (const r of results) console.log(`  ${r.ok ? '✓' : '✗'} ${r.n}${r.d ? '  ' + r.d : ''}`)
+console.log(`\n  ${ok} passed, ${results.length - ok} failed, ${results.length} total`)
+writeFileSync(`${SHOTS}/report.json`, JSON.stringify({ results, consoleErrors, pageErrors }, null, 2))
+process.exit(results.length - ok ? 1 : 0)

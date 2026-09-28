@@ -1,0 +1,40 @@
+{
+  "source": "optical_utm.tif",
+  "sensor": "optical",
+  "bands": 4,
+  "band_names": [
+    "red",
+    "green",
+    "blue",
+    "nir"
+  ],
+  "width": 128,
+  "height": 128,
+  "crs": "EPSG:32644",
+  "georeferenced": true,
+  "geotransform": [
+    301700.0,
+    10.0,
+    0.0,
+    2339500.0,
+    0.0,
+    -10.0
+  ],
+  "crs_kind": "utm",
+  "gsd_m": 10.0,
+  "bounds": [
+    79.090363,
+    21.134455,
+    79.102831,
+    21.146153
+  ],
+  "centre": [
+    21.140304,
+    79.096597
+  ],
+  "acquired": "",
+  "raster_id": "r-edc771d56529",
+  "role": "optical",
+  "stored_bytes": 263424,
+  "uploaded_at": "2026-09-23T07:20:25Z"
+}

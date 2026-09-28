@@ -1,0 +1,323 @@
+{
+  "query": "How much vegetation is there?",
+  "answer": "17,800.93 hectares. The adapted model (M1) answers: 0.",
+  "refused": false,
+  "abstained": false,
+  "confidence": 0.97,
+  "task": "single_vqa",
+  "tools": [
+    "rs_vqa"
+  ],
+  "params": {
+    "threshold": 0.0
+  },
+  "evidence": {
+    "threshold": 0.0,
+    "confidence": 0.97,
+    "abstain": false,
+    "count": 2,
+    "passing": 2,
+    "items": [
+      {
+        "claim": "area of vegetation",
+        "value": 17800.934,
+        "unit": "ha",
+        "confidence": 0.97,
+        "modality": "optical",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 17800.934,
+        "supporting": [
+          "upper threshold 0.4375 of a 3-class Otsu split",
+          "13 regions above 120 px",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "pixel count x ground sample distance squared"
+      },
+      {
+        "claim": "M1 answer",
+        "value": "0",
+        "unit": "",
+        "confidence": 0.366,
+        "modality": "optical",
+        "source_model": "m1-rs-vqa-r2",
+        "source_version": "precomputed",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "served precomputed",
+          "measured: area of vegetation = 17800.934"
+        ],
+        "conflicts": [],
+        "method": "M1 \u2014 QLoRA-adapted Qwen2-VL-7B (precomputed)"
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": []
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "3 raster(s) \u00b7 optical_sar",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "sar",
+            "sensor": "sar",
+            "crs": "EPSG:4326",
+            "bands": 2,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "t1",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 3,
+            "gsd_m": 217.42,
+            "georeferenced": false
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "single_vqa \u00b7 matched /how much/",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "optical_sar satisfies rs_vqa",
+      "ok": true,
+      "ms": 0.4,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "rs_vqa (adapter_A_rs_general)",
+      "ok": true,
+      "ms": 0.4,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.0",
+      "ok": true,
+      "ms": 0.4,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Co-registration checked",
+      "detail": "optical/sar \u00b7 offset 0.00 px (tolerance 2 px)",
+      "ok": true,
+      "ms": 57.9,
+      "data": {
+        "offset_px": 0.0,
+        "geometric_px": 0.0,
+        "phase_px": 0.0,
+        "same_crs": true,
+        "same_shape": true
+      }
+    },
+    {
+      "step": "Executed rs_vqa",
+      "detail": "2 evidence item(s) \u00b7 path neural+classical \u00b7 M1 precomputed",
+      "ok": true,
+      "ms": 137.4,
+      "data": {
+        "items": [
+          {
+            "claim": "area of vegetation",
+            "value": 17800.934,
+            "confidence": 0.97,
+            "modality": "optical"
+          },
+          {
+            "claim": "M1 answer",
+            "value": "0",
+            "confidence": 0.366,
+            "modality": "optical"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Confidence",
+      "detail": "0.97 \u00b7 2/2 items passed the gate",
+      "ok": true,
+      "ms": 137.5,
+      "data": {}
+    },
+    {
+      "step": "Evidence returned",
+      "detail": "0 feature(s) \u00b7 EPSG:4326",
+      "ok": true,
+      "ms": 137.5,
+      "data": {
+        "engine": "neural+classical",
+        "crs": "EPSG:4326"
+      }
+    }
+  ],
+  "manifest": {
+    "modality": "optical_sar",
+    "count": 3,
+    "rasters": [
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "optical"
+      },
+      {
+        "source": "kharagpur_sar.tif",
+        "sensor": "sar",
+        "bands": 2,
+        "band_names": [
+          "vv",
+          "vh"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-1 GRD (synthetic)",
+        "looks": 4,
+        "polarisation": "VV+VH",
+        "role": "sar"
+      },
+      {
+        "source": "source.png",
+        "sensor": "optical",
+        "bands": 3,
+        "band_names": [
+          "red",
+          "green",
+          "blue"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": false,
+        "geotransform": [
+          0.0,
+          0.001953125,
+          0.0,
+          0.0,
+          0.0,
+          -0.001953125
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 217.42,
+        "bounds": [
+          0.0,
+          -1.0,
+          1.0,
+          0.0
+        ],
+        "centre": [
+          -0.5,
+          0.5
+        ],
+        "acquired": "",
+        "role": "t1"
+      }
+    ],
+    "georeferenced": false,
+    "sensors": [
+      "optical",
+      "sar"
+    ]
+  },
+  "elapsed_ms": 137.7,
+  "version": "0.4.0",
+  "engine": "neural+classical",
+  "run_id": "run-20260923T065713-7942b6",
+  "created": "2026-09-23T06:57:13Z",
+  "precomputed": true
+}

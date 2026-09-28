@@ -1,0 +1,26 @@
+{
+  "base": "Qwen/Qwen2-VL-7B-Instruct",
+  "corpus": "VRSBench",
+  "split": "train",
+  "samples": 12000,
+  "epochs": 1.0,
+  "seed": 0,
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "targets": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "lr": 0.0002,
+  "effective_batch": 32,
+  "dtype": "fp16",
+  "load_in_4bit": true,
+  "wall_hours": 0.11,
+  "pack_mb": 31.6,
+  "zero_shot_reference": "see models/MANIFEST.md"
+}

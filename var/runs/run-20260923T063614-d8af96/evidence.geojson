@@ -1,0 +1,467 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.326836,
+              23.481367
+            ],
+            [
+              85.396797,
+              23.481367
+            ],
+            [
+              85.396797,
+              23.419844
+            ],
+            [
+              85.326836,
+              23.419844
+            ],
+            [
+              85.326836,
+              23.481367
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 3441.37,
+        "area_px": 24657,
+        "claim": "detected built regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.371133,
+              23.419844
+            ],
+            [
+              85.384844,
+              23.419844
+            ],
+            [
+              85.384844,
+              23.411406
+            ],
+            [
+              85.371133,
+              23.411406
+            ],
+            [
+              85.371133,
+              23.419844
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 70.501,
+        "area_px": 505,
+        "claim": "detected built regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.24,
+              23.414219
+            ],
+            [
+              85.338086,
+              23.414219
+            ],
+            [
+              85.338086,
+              23.366406
+            ],
+            [
+              85.24,
+              23.366406
+            ],
+            [
+              85.24,
+              23.414219
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 556.578,
+        "area_px": 3986,
+        "claim": "detected water regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.361992,
+              23.40543
+            ],
+            [
+              85.42,
+              23.40543
+            ],
+            [
+              85.42,
+              23.370625
+            ],
+            [
+              85.361992,
+              23.370625
+            ],
+            [
+              85.361992,
+              23.40543
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 324.095,
+        "area_px": 2321,
+        "claim": "detected water regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.321914,
+              23.41668
+            ],
+            [
+              85.42,
+              23.41668
+            ],
+            [
+              85.42,
+              23.32
+            ],
+            [
+              85.321914,
+              23.32
+            ],
+            [
+              85.321914,
+              23.41668
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 5552.043,
+        "area_px": 39755,
+        "claim": "detected vegetation regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.24,
+              23.5
+            ],
+            [
+              85.338437,
+              23.5
+            ],
+            [
+              85.338437,
+              23.399805
+            ],
+            [
+              85.24,
+              23.399805
+            ],
+            [
+              85.24,
+              23.5
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 3863.589,
+        "area_px": 27682,
+        "claim": "detected vegetation regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.354609,
+              23.5
+            ],
+            [
+              85.42,
+              23.5
+            ],
+            [
+              85.42,
+              23.439883
+            ],
+            [
+              85.354609,
+              23.439883
+            ],
+            [
+              85.354609,
+              23.5
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 2004.346,
+        "area_px": 14363,
+        "claim": "detected vegetation regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.289219,
+              23.439883
+            ],
+            [
+              85.340195,
+              23.439883
+            ],
+            [
+              85.340195,
+              23.392773
+            ],
+            [
+              85.289219,
+              23.392773
+            ],
+            [
+              85.289219,
+              23.439883
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 1527.288,
+        "area_px": 10940,
+        "claim": "detected vegetation regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.305742,
+              23.359727
+            ],
+            [
+              85.338437,
+              23.359727
+            ],
+            [
+              85.338437,
+              23.32
+            ],
+            [
+              85.305742,
+              23.32
+            ],
+            [
+              85.305742,
+              23.359727
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 1101.428,
+        "area_px": 7885,
+        "claim": "detected vegetation regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.24,
+              23.377305
+            ],
+            [
+              85.273047,
+              23.377305
+            ],
+            [
+              85.273047,
+              23.339688
+            ],
+            [
+              85.24,
+              23.339688
+            ],
+            [
+              85.24,
+              23.377305
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 1098.48,
+        "area_px": 7865,
+        "claim": "detected vegetation regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.243164,
+              23.399805
+            ],
+            [
+              85.289219,
+              23.399805
+            ],
+            [
+              85.289219,
+              23.373438
+            ],
+            [
+              85.243164,
+              23.373438
+            ],
+            [
+              85.243164,
+              23.399805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 895.633,
+        "area_px": 6414,
+        "claim": "detected vegetation regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.289219,
+              23.379766
+            ],
+            [
+              85.321914,
+              23.379766
+            ],
+            [
+              85.321914,
+              23.339688
+            ],
+            [
+              85.289219,
+              23.339688
+            ],
+            [
+              85.289219,
+              23.379766
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 691.484,
+        "area_px": 4951,
+        "claim": "detected vegetation regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.338789,
+              23.480313
+            ],
+            [
+              85.39293,
+              23.480313
+            ],
+            [
+              85.39293,
+              23.42582
+            ],
+            [
+              85.338789,
+              23.42582
+            ],
+            [
+              85.338789,
+              23.480313
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 1928.398,
+        "area_px": 13817,
+        "claim": "count of built regions",
+        "confidence": 0.97,
+        "modality": "sar",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.261094,
+              23.446562
+            ],
+            [
+              85.277266,
+              23.446562
+            ],
+            [
+              85.277266,
+              23.430391
+            ],
+            [
+              85.261094,
+              23.430391
+            ],
+            [
+              85.261094,
+              23.446562
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 224.449,
+        "area_px": 1608,
+        "claim": "count of built regions",
+        "confidence": 0.97,
+        "modality": "sar",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.283242,
+              23.369219
+            ],
+            [
+              85.305039,
+              23.369219
+            ],
+            [
+              85.305039,
+              23.359023
+            ],
+            [
+              85.283242,
+              23.359023
+            ],
+            [
+              85.283242,
+              23.369219
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 153.208,
+        "area_px": 1097,
+        "claim": "count of built regions",
+        "confidence": 0.97,
+        "modality": "sar",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.285,
+              23.381875
+            ],
+            [
+              85.305039,
+              23.381875
+            ],
+            [
+              85.305039,
+              23.371328
+            ],
+            [
+              85.285,
+              23.371328
+            ],
+            [
+              85.285,
+              23.381875
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 146.351,
+        "area_px": 1048,
+        "claim": "count of built regions",
+        "confidence": 0.97,
+        "modality": "sar",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.326836,
+              23.417031
+            ],
+            [
+              85.33668,
+              23.417031
+            ],
+            [
+              85.33668,
+              23.40543
+            ],
+            [
+              85.326836,
+              23.40543
+            ],
+            [
+              85.326836,
+              23.417031
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 67.851,
+        "area_px": 486,
+        "claim": "count of built regions",
+        "confidence": 0.97,
+        "modality": "sar",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.331758,
+              23.412461
+            ],
+            [
+              85.340898,
+              23.412461
+            ],
+            [
+              85.340898,
+              23.402617
+            ],
+            [
+              85.331758,
+              23.402617
+            ],
+            [
+              85.331758,
+              23.412461
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 53.752,
+        "area_px": 385,
+        "claim": "count of built regions",
+        "confidence": 0.97,
+        "modality": "sar",
+        "model": "adapter_A_rs_general"
+      }
+    }
+  ]
+}

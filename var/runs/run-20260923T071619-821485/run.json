@@ -1,0 +1,702 @@
+{
+  "query": "Use the optical and SAR images together to identify built-up and water-covered regions.",
+  "answer": "SAR detects 6 built-up areas totalling 2574.9 ha. Cloud obscures 6.0% of the optical scene. 1 of them \u2014 1472.9 ha \u2014 lies beneath that cloud and is invisible to the optical sensor. Radar recovered it because radar penetrates cloud and built structures return strongly from corner reflection. That is information neither sensor provides alone.",
+  "refused": false,
+  "abstained": false,
+  "confidence": 0.929,
+  "task": "cross_modal",
+  "tools": [
+    "optical_sar"
+  ],
+  "params": {
+    "threshold": 0.45
+  },
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.929,
+    "abstain": false,
+    "count": 5,
+    "passing": 5,
+    "items": [
+      {
+        "claim": "co-registration verified",
+        "value": 0.0,
+        "unit": "px",
+        "confidence": 0.95,
+        "modality": "fused",
+        "source_model": "fusion_late_v0",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "geometric 0.00 px",
+          "phase 0.00 px",
+          "same CRS: True"
+        ],
+        "conflicts": [],
+        "method": "geometric extent + phase correlation"
+      },
+      {
+        "claim": "optical scene obscured by cloud",
+        "value": 6.0,
+        "unit": "%",
+        "confidence": 0.88,
+        "modality": "optical",
+        "source_model": "fusion_late_v0",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 2195.479,
+        "supporting": [
+          "15,730 px of 262,144"
+        ],
+        "conflicts": [],
+        "method": "brightness and spectral flatness across visible bands"
+      },
+      {
+        "claim": "built-up areas detected by backscatter",
+        "value": 6,
+        "unit": "areas",
+        "confidence": 0.97,
+        "modality": "sar",
+        "source_model": "fusion_late_v0",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 281,
+            "y0": 56,
+            "x1": 434,
+            "y1": 210,
+            "lon0": 85.338789,
+            "lat0": 23.480313,
+            "lon1": 85.39293,
+            "lat1": 23.42582,
+            "area_px": 13817,
+            "area_ha": 1928.398
+          },
+          {
+            "x0": 60,
+            "y0": 152,
+            "x1": 105,
+            "y1": 197,
+            "lon0": 85.261094,
+            "lat0": 23.446562,
+            "lon1": 85.277266,
+            "lat1": 23.430391,
+            "area_px": 1608,
+            "area_ha": 224.449
+          },
+          {
+            "x0": 123,
+            "y0": 372,
+            "x1": 184,
+            "y1": 400,
+            "lon0": 85.283242,
+            "lat0": 23.369219,
+            "lon1": 85.305039,
+            "lat1": 23.359023,
+            "area_px": 1097,
+            "area_ha": 153.208
+          },
+          {
+            "x0": 128,
+            "y0": 336,
+            "x1": 184,
+            "y1": 365,
+            "lon0": 85.285,
+            "lat0": 23.381875,
+            "lon1": 85.305039,
+            "lat1": 23.371328,
+            "area_px": 1048,
+            "area_ha": 146.351
+          },
+          {
+            "x0": 247,
+            "y0": 236,
+            "x1": 274,
+            "y1": 268,
+            "lon0": 85.326836,
+            "lat0": 23.417031,
+            "lon1": 85.33668,
+            "lat1": 23.40543,
+            "area_px": 486,
+            "area_ha": 67.851
+          },
+          {
+            "x0": 261,
+            "y0": 249,
+            "x1": 286,
+            "y1": 276,
+            "lon0": 85.331758,
+            "lat0": 23.412461,
+            "lon1": 85.340898,
+            "lat1": 23.402617,
+            "area_px": 385,
+            "area_ha": 53.752
+          }
+        ],
+        "mask_area_ha": 2574.866,
+        "supporting": [
+          "threshold 0.5932 linear (-2.3 dB), upper of a 3-class Otsu split",
+          "Lee filter 7x7, 4 looks \u2014 speckle is multiplicative",
+          "corner reflection from structures returns strongly",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "Lee filter, Otsu on backscatter, connected components"
+      },
+      {
+        "claim": "built-up areas recovered by SAR beneath cloud",
+        "value": 1,
+        "unit": "areas",
+        "confidence": 0.931,
+        "modality": "fused",
+        "source_model": "fusion_late_v0",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 281,
+            "y0": 76,
+            "x1": 422,
+            "y1": 209,
+            "lon0": 85.338789,
+            "lat0": 23.473281,
+            "lon1": 85.388711,
+            "lat1": 23.426172,
+            "area_px": 10553,
+            "area_ha": 1472.889
+          }
+        ],
+        "mask_area_ha": 1472.915,
+        "supporting": [
+          "57.2% of detected built-up area lies under cloud",
+          "1472.91 ha invisible to the optical sensor",
+          "radar penetrates cloud; optical does not \u2014 this is the complementary information neither modality gives alone"
+        ],
+        "conflicts": [],
+        "method": "intersection of the SAR structure mask with the optical cloud mask"
+      },
+      {
+        "claim": "cross-modal agreement in clear sky",
+        "value": 98.13,
+        "unit": "%",
+        "confidence": 0.943,
+        "modality": "fused",
+        "source_model": "fusion_late_v0",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "98.1% of clear-sky built-up pixels are not vegetated in the optical scene"
+        ],
+        "conflicts": [],
+        "method": "SAR structure mask against optical NDVI, cloud-free pixels only"
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.338789,
+                23.480313
+              ],
+              [
+                85.39293,
+                23.480313
+              ],
+              [
+                85.39293,
+                23.42582
+              ],
+              [
+                85.338789,
+                23.42582
+              ],
+              [
+                85.338789,
+                23.480313
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 1928.398,
+          "area_px": 13817,
+          "claim": "built-up areas detected by backscatter",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "fusion_late_v0"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.261094,
+                23.446562
+              ],
+              [
+                85.277266,
+                23.446562
+              ],
+              [
+                85.277266,
+                23.430391
+              ],
+              [
+                85.261094,
+                23.430391
+              ],
+              [
+                85.261094,
+                23.446562
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 224.449,
+          "area_px": 1608,
+          "claim": "built-up areas detected by backscatter",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "fusion_late_v0"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.283242,
+                23.369219
+              ],
+              [
+                85.305039,
+                23.369219
+              ],
+              [
+                85.305039,
+                23.359023
+              ],
+              [
+                85.283242,
+                23.359023
+              ],
+              [
+                85.283242,
+                23.369219
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 153.208,
+          "area_px": 1097,
+          "claim": "built-up areas detected by backscatter",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "fusion_late_v0"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.285,
+                23.381875
+              ],
+              [
+                85.305039,
+                23.381875
+              ],
+              [
+                85.305039,
+                23.371328
+              ],
+              [
+                85.285,
+                23.371328
+              ],
+              [
+                85.285,
+                23.381875
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 146.351,
+          "area_px": 1048,
+          "claim": "built-up areas detected by backscatter",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "fusion_late_v0"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.326836,
+                23.417031
+              ],
+              [
+                85.33668,
+                23.417031
+              ],
+              [
+                85.33668,
+                23.40543
+              ],
+              [
+                85.326836,
+                23.40543
+              ],
+              [
+                85.326836,
+                23.417031
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 67.851,
+          "area_px": 486,
+          "claim": "built-up areas detected by backscatter",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "fusion_late_v0"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.331758,
+                23.412461
+              ],
+              [
+                85.340898,
+                23.412461
+              ],
+              [
+                85.340898,
+                23.402617
+              ],
+              [
+                85.331758,
+                23.402617
+              ],
+              [
+                85.331758,
+                23.412461
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 53.752,
+          "area_px": 385,
+          "claim": "built-up areas detected by backscatter",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "fusion_late_v0"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.338789,
+                23.473281
+              ],
+              [
+                85.388711,
+                23.473281
+              ],
+              [
+                85.388711,
+                23.426172
+              ],
+              [
+                85.338789,
+                23.426172
+              ],
+              [
+                85.338789,
+                23.473281
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 1472.889,
+          "area_px": 10553,
+          "claim": "built-up areas recovered by SAR beneath cloud",
+          "confidence": 0.931,
+          "modality": "fused",
+          "model": "fusion_late_v0"
+        }
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "2 raster(s) \u00b7 optical_sar",
+      "ok": true,
+      "ms": 0.2,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "sar",
+            "sensor": "sar",
+            "crs": "EPSG:4326",
+            "bands": 2,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "cross_modal \u00b7 matched /optical and/",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "optical_sar satisfies optical_sar",
+      "ok": true,
+      "ms": 0.3,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "optical_sar (fusion_late_v0)",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.45",
+      "ok": true,
+      "ms": 0.4,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Co-registration checked",
+      "detail": "optical/sar \u00b7 offset 0.00 px (tolerance 2 px)",
+      "ok": true,
+      "ms": 59.5,
+      "data": {
+        "offset_px": 0.0,
+        "geometric_px": 0.0,
+        "phase_px": 0.0,
+        "same_crs": true,
+        "same_shape": true
+      }
+    },
+    {
+      "step": "Executed optical_sar",
+      "detail": "5 evidence item(s) \u00b7 path classical",
+      "ok": true,
+      "ms": 221.9,
+      "data": {
+        "items": [
+          {
+            "claim": "co-registration verified",
+            "value": 0.0,
+            "confidence": 0.95,
+            "modality": "fused"
+          },
+          {
+            "claim": "optical scene obscured by cloud",
+            "value": 6.0,
+            "confidence": 0.88,
+            "modality": "optical"
+          },
+          {
+            "claim": "built-up areas detected by backscatter",
+            "value": 6,
+            "confidence": 0.97,
+            "modality": "sar"
+          },
+          {
+            "claim": "built-up areas recovered by SAR beneath cloud",
+            "value": 1,
+            "confidence": 0.931,
+            "modality": "fused"
+          },
+          {
+            "claim": "cross-modal agreement in clear sky",
+            "value": 98.13,
+            "confidence": 0.943,
+            "modality": "fused"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Confidence",
+      "detail": "0.93 \u00b7 5/5 items passed the gate",
+      "ok": true,
+      "ms": 222.0,
+      "data": {}
+    },
+    {
+      "step": "Evidence returned",
+      "detail": "7 feature(s) \u00b7 EPSG:4326",
+      "ok": true,
+      "ms": 222.0,
+      "data": {
+        "engine": "classical",
+        "crs": "EPSG:4326"
+      }
+    }
+  ],
+  "manifest": {
+    "modality": "optical_sar",
+    "count": 2,
+    "rasters": [
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "optical"
+      },
+      {
+        "source": "kharagpur_sar.tif",
+        "sensor": "sar",
+        "bands": 2,
+        "band_names": [
+          "vv",
+          "vh"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-1 GRD (synthetic)",
+        "looks": 4,
+        "polarisation": "VV+VH",
+        "role": "sar"
+      }
+    ],
+    "georeferenced": true,
+    "sensors": [
+      "optical",
+      "sar"
+    ]
+  },
+  "elapsed_ms": 222.2,
+  "version": "0.4.0",
+  "engine": "classical",
+  "run_id": "run-20260923T071619-821485",
+  "created": "2026-09-23T07:16:19Z",
+  "precomputed": false
+}

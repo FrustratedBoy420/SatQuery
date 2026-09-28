@@ -1,0 +1,127 @@
+{
+  "query": "Use the optical and SAR images together to identify built-up and water-covered regions.",
+  "answer": "This question needs a co-registered optical and SAR pair, but one image was supplied. Upload a co-registered optical image and a SAR image of the same area.",
+  "refused": true,
+  "abstained": false,
+  "confidence": 0.0,
+  "task": "cross_modal",
+  "tools": [],
+  "params": {},
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.0,
+    "abstain": false,
+    "count": 0,
+    "passing": 0,
+    "items": []
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": []
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "1 raster(s) \u00b7 single",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "cross_modal \u00b7 matched /optical and/",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "requires optical_sar, found single",
+      "ok": false,
+      "ms": 0.1,
+      "data": {}
+    },
+    {
+      "step": "Refused",
+      "detail": "no model invoked",
+      "ok": false,
+      "ms": 0.2,
+      "data": {}
+    }
+  ],
+  "manifest": {
+    "modality": "single",
+    "count": 1,
+    "rasters": [
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "optical"
+      }
+    ],
+    "georeferenced": true,
+    "sensors": [
+      "optical"
+    ]
+  },
+  "elapsed_ms": 0.3,
+  "version": "0.4.0",
+  "engine": "classical",
+  "run_id": "run-20260923T063630-823fa6",
+  "created": "2026-09-23T06:36:30Z",
+  "precomputed": false
+}

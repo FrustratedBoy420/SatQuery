@@ -1,0 +1,211 @@
+{
+  "query": "Is there a body of water present under the bridges?",
+  "answer": "Yes.",
+  "refused": false,
+  "abstained": false,
+  "confidence": 0.973,
+  "task": "single_vqa",
+  "tools": [
+    "rs_vqa"
+  ],
+  "params": {
+    "threshold": 0.45
+  },
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.973,
+    "abstain": false,
+    "count": 2,
+    "passing": 1,
+    "items": [
+      {
+        "claim": "M1 answer",
+        "value": "Yes",
+        "unit": "",
+        "confidence": 0.973,
+        "modality": "optical",
+        "source_model": "m1-rs-vqa-r2",
+        "source_version": "precomputed",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "served precomputed"
+        ],
+        "conflicts": [],
+        "method": "M1 \u2014 QLoRA-adapted Qwen2-VL-7B (precomputed)"
+      },
+      {
+        "claim": "presence of water",
+        "value": "no",
+        "unit": "",
+        "confidence": 0.0,
+        "modality": "derived",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [],
+        "conflicts": [],
+        "method": "thresholded index, then area test"
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "urn:satquery:def:crs:image-pixels"
+      }
+    },
+    "features": []
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "1 raster(s) \u00b7 single",
+      "ok": true,
+      "ms": 0.0,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 3,
+            "gsd_m": 217.42,
+            "georeferenced": false
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "single_vqa \u00b7 matched /is there/",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "single satisfies rs_vqa",
+      "ok": true,
+      "ms": 0.1,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "rs_vqa (adapter_A_rs_general)",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.45",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Executed rs_vqa",
+      "detail": "2 evidence item(s) \u00b7 path neural+classical \u00b7 M1 precomputed",
+      "ok": true,
+      "ms": 4.9,
+      "data": {
+        "items": [
+          {
+            "claim": "M1 answer",
+            "value": "Yes",
+            "confidence": 0.973,
+            "modality": "optical"
+          },
+          {
+            "claim": "presence of water",
+            "value": "no",
+            "confidence": 0.0,
+            "modality": "derived"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Confidence",
+      "detail": "0.97 \u00b7 1/2 items passed the gate",
+      "ok": true,
+      "ms": 4.9,
+      "data": {}
+    },
+    {
+      "step": "Evidence returned",
+      "detail": "0 feature(s) \u00b7 pixel space \u2014 the imagery is not georeferenced",
+      "ok": true,
+      "ms": 4.9,
+      "data": {
+        "engine": "neural+classical",
+        "crs": "urn:satquery:def:crs:image-pixels"
+      }
+    }
+  ],
+  "manifest": {
+    "modality": "single",
+    "count": 1,
+    "rasters": [
+      {
+        "source": "source.png",
+        "sensor": "optical",
+        "bands": 3,
+        "band_names": [
+          "red",
+          "green",
+          "blue"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": false,
+        "geotransform": [
+          0.0,
+          0.001953125,
+          0.0,
+          0.0,
+          0.0,
+          -0.001953125
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 217.42,
+        "bounds": [
+          0.0,
+          -1.0,
+          1.0,
+          0.0
+        ],
+        "centre": [
+          -0.5,
+          0.5
+        ],
+        "acquired": "",
+        "role": "optical"
+      }
+    ],
+    "georeferenced": false,
+    "sensors": [
+      "optical"
+    ]
+  },
+  "elapsed_ms": 5.0,
+  "version": "0.4.0",
+  "engine": "neural+classical",
+  "run_id": "run-20260923T065542-bc4854",
+  "created": "2026-09-23T06:55:42Z",
+  "precomputed": true
+}

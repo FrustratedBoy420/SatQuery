@@ -1,0 +1,315 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:satquery:def:crs:image-pixels"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0,
+              258
+            ],
+            [
+              512,
+              258
+            ],
+            [
+              512,
+              345
+            ],
+            [
+              0,
+              345
+            ],
+            [
+              0,
+              258
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 0.0,
+        "area_px": 23515,
+        "claim": "detected built regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              94,
+              355
+            ],
+            [
+              211,
+              355
+            ],
+            [
+              211,
+              441
+            ],
+            [
+              94,
+              441
+            ],
+            [
+              94,
+              355
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 0.0,
+        "area_px": 5011,
+        "claim": "detected built regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0,
+              464
+            ],
+            [
+              85,
+              464
+            ],
+            [
+              85,
+              512
+            ],
+            [
+              0,
+              512
+            ],
+            [
+              0,
+              464
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 0.0,
+        "area_px": 2894,
+        "claim": "detected built regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              114,
+              310
+            ],
+            [
+              512,
+              310
+            ],
+            [
+              512,
+              403
+            ],
+            [
+              114,
+              403
+            ],
+            [
+              114,
+              310
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 0.0,
+        "area_px": 2812,
+        "claim": "detected built regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              0,
+              352
+            ],
+            [
+              77,
+              352
+            ],
+            [
+              77,
+              405
+            ],
+            [
+              0,
+              405
+            ],
+            [
+              0,
+              352
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 0.0,
+        "area_px": 2395,
+        "claim": "detected built regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              178,
+              59
+            ],
+            [
+              247,
+              59
+            ],
+            [
+              247,
+              146
+            ],
+            [
+              178,
+              146
+            ],
+            [
+              178,
+              59
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 0.0,
+        "area_px": 1380,
+        "claim": "detected built regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              344,
+              497
+            ],
+            [
+              512,
+              497
+            ],
+            [
+              512,
+              512
+            ],
+            [
+              344,
+              512
+            ],
+            [
+              344,
+              497
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 0.0,
+        "area_px": 656,
+        "claim": "detected built regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              261,
+              504
+            ],
+            [
+              343,
+              504
+            ],
+            [
+              343,
+              512
+            ],
+            [
+              261,
+              512
+            ],
+            [
+              261,
+              504
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 0.0,
+        "area_px": 247,
+        "claim": "detected built regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "model": "adapter_A_rs_general"
+      }
+    }
+  ]
+}

@@ -1,0 +1,452 @@
+{
+  "query": "Highlight the water body referred to in the query.",
+  "answer": "2 regions matched, covering 880.73 ha. The largest is centred at 23.3903 N 85.2890 E and covers 556.58 ha.",
+  "refused": false,
+  "abstained": false,
+  "confidence": 0.97,
+  "task": "grounding",
+  "tools": [
+    "grounding"
+  ],
+  "params": {
+    "threshold": 0.45
+  },
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.97,
+    "abstain": false,
+    "count": 1,
+    "passing": 1,
+    "items": [
+      {
+        "claim": "water regions located",
+        "value": 2,
+        "unit": "regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "source_model": "adapter_B_grounding",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 0,
+            "y0": 244,
+            "x1": 278,
+            "y1": 379,
+            "lon0": 85.24,
+            "lat0": 23.414219,
+            "lon1": 85.338086,
+            "lat1": 23.366406,
+            "area_px": 3986,
+            "area_ha": 556.578
+          },
+          {
+            "x0": 347,
+            "y0": 269,
+            "x1": 511,
+            "y1": 367,
+            "lon0": 85.361992,
+            "lat0": 23.40543,
+            "lon1": 85.42,
+            "lat1": 23.370625,
+            "area_px": 2321,
+            "area_ha": 324.095
+          }
+        ],
+        "mask_area_ha": 880.731,
+        "supporting": [
+          "upper threshold 0.1851 of a 3-class Otsu split",
+          "2 regions above 60 px",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "NDWI = (green - nir) / (green + nir)"
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.24,
+                23.414219
+              ],
+              [
+                85.338086,
+                23.414219
+              ],
+              [
+                85.338086,
+                23.366406
+              ],
+              [
+                85.24,
+                23.366406
+              ],
+              [
+                85.24,
+                23.414219
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 556.578,
+          "area_px": 3986,
+          "claim": "water regions located",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_B_grounding"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.361992,
+                23.40543
+              ],
+              [
+                85.42,
+                23.40543
+              ],
+              [
+                85.42,
+                23.370625
+              ],
+              [
+                85.361992,
+                23.370625
+              ],
+              [
+                85.361992,
+                23.40543
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 324.095,
+          "area_px": 2321,
+          "claim": "water regions located",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_B_grounding"
+        }
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "4 raster(s) \u00b7 bi_temporal",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "sar",
+            "sensor": "sar",
+            "crs": "EPSG:4326",
+            "bands": 2,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "t1",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "t2",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "grounding \u00b7 matched /highlight/",
+      "ok": true,
+      "ms": 0.4,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "bi_temporal satisfies grounding",
+      "ok": true,
+      "ms": 0.4,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "grounding (adapter_B_grounding)",
+      "ok": true,
+      "ms": 0.4,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.45",
+      "ok": true,
+      "ms": 0.4,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Co-registration checked",
+      "detail": "t1/t2 \u00b7 offset 0.00 px (tolerance 2 px)",
+      "ok": true,
+      "ms": 27.5,
+      "data": {
+        "offset_px": 0.0,
+        "geometric_px": 0.0,
+        "phase_px": 0.0,
+        "same_crs": true,
+        "same_shape": true
+      }
+    },
+    {
+      "step": "Executed grounding",
+      "detail": "1 evidence item(s) \u00b7 path classical",
+      "ok": true,
+      "ms": 70.6,
+      "data": {
+        "items": [
+          {
+            "claim": "water regions located",
+            "value": 2,
+            "confidence": 0.97,
+            "modality": "optical"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Confidence",
+      "detail": "0.97 \u00b7 1/1 items passed the gate",
+      "ok": true,
+      "ms": 70.6,
+      "data": {}
+    },
+    {
+      "step": "Evidence returned",
+      "detail": "2 feature(s) \u00b7 EPSG:4326",
+      "ok": true,
+      "ms": 70.6,
+      "data": {
+        "engine": "classical",
+        "crs": "EPSG:4326"
+      }
+    }
+  ],
+  "manifest": {
+    "modality": "bi_temporal",
+    "count": 4,
+    "rasters": [
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "optical"
+      },
+      {
+        "source": "kharagpur_sar.tif",
+        "sensor": "sar",
+        "bands": 2,
+        "band_names": [
+          "vv",
+          "vh"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-1 GRD (synthetic)",
+        "looks": 4,
+        "polarisation": "VV+VH",
+        "role": "sar"
+      },
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2022-01-18T05:41:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "t1"
+      },
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "t2"
+      }
+    ],
+    "georeferenced": true,
+    "sensors": [
+      "optical",
+      "sar"
+    ]
+  },
+  "elapsed_ms": 70.7,
+  "version": "0.4.0",
+  "engine": "classical",
+  "run_id": "run-20260923T072018-185100",
+  "created": "2026-09-23T07:20:18Z",
+  "precomputed": false
+}

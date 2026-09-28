@@ -1,0 +1,24 @@
+# The stack the Modal runtime image installs (doc 12, P1-4). Exact versions:
+# a different stack can change what M1 answers.
+#
+# STATUS: validated 26 Sep 2026. The parity run (doc 12, §8.1, deploy/parity.py)
+# reproduced 300/300 of models/results/m1_calibration.jsonl on exactly this stack
+# on a Modal T4. Provenance: only peft is recorded by the run that produced the
+# adapter (adapter_config.json: peft_version 0.19.1). That run's transformers was
+# 5.18.0.dev0 (models/MANIFEST.md), a pre-release with no wheel on PyPI, so 5.17.0
+# is the nearest release, not the same code; torch, torchvision, bitsandbytes and
+# accelerate were not recorded. Parity is the evidence these are equivalent for
+# M1's answers. Change one version at a time and re-run it.
+#
+# The last four match ../pyproject.toml so the runtime's `satquery` package
+# imports what the API's does.
+torch==2.14.0
+torchvision==0.29.0       # requires torch==2.14.0; Qwen2-VL's processor imports it (found at first boot)
+transformers==5.17.0
+peft==0.19.1
+bitsandbytes==0.50.2
+accelerate==1.15.0
+numpy==2.5.3
+pillow==12.3.0
+fastapi==0.141.1
+starlette==1.6.0

@@ -1,0 +1,50 @@
+{
+  "query": "Describe the land-cover and major objects visible in this image.",
+  "answer": "No imagery was supplied. Upload at least one image to analyse.",
+  "refused": true,
+  "abstained": false,
+  "confidence": 0.0,
+  "task": "",
+  "tools": [],
+  "params": {},
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.0,
+    "abstain": false,
+    "count": 0,
+    "passing": 0,
+    "items": []
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": []
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "no rasters supplied",
+      "ok": false,
+      "ms": 0.0,
+      "data": {}
+    }
+  ],
+  "manifest": {
+    "modality": "none",
+    "count": 0,
+    "rasters": [],
+    "georeferenced": false,
+    "sensors": []
+  },
+  "elapsed_ms": 0.1,
+  "version": "0.4.0",
+  "engine": "classical",
+  "run_id": "run-20260923T070213-5b91ce",
+  "created": "2026-09-23T07:02:13Z",
+  "precomputed": false
+}

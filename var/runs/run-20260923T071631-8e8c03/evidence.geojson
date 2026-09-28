@@ -1,0 +1,391 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.354258,
+              23.435664
+            ],
+            [
+              85.387656,
+              23.435664
+            ],
+            [
+              85.387656,
+              23.415977
+            ],
+            [
+              85.354258,
+              23.415977
+            ],
+            [
+              85.354258,
+              23.435664
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 376.63,
+        "area_px": 2698,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.378516,
+              23.486992
+            ],
+            [
+              85.403125,
+              23.486992
+            ],
+            [
+              85.403125,
+              23.453945
+            ],
+            [
+              85.378516,
+              23.453945
+            ],
+            [
+              85.378516,
+              23.486992
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 333.382,
+        "area_px": 2389,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.354258,
+              23.489805
+            ],
+            [
+              85.376758,
+              23.489805
+            ],
+            [
+              85.376758,
+              23.479609
+            ],
+            [
+              85.354258,
+              23.479609
+            ],
+            [
+              85.354258,
+              23.489805
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 229.114,
+        "area_px": 1642,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.33,
+              23.476797
+            ],
+            [
+              85.342305,
+              23.476797
+            ],
+            [
+              85.342305,
+              23.429336
+            ],
+            [
+              85.33,
+              23.429336
+            ],
+            [
+              85.33,
+              23.476797
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 211.165,
+        "area_px": 1513,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.257578,
+              23.449375
+            ],
+            [
+              85.28043,
+              23.449375
+            ],
+            [
+              85.28043,
+              23.427227
+            ],
+            [
+              85.257578,
+              23.427227
+            ],
+            [
+              85.257578,
+              23.449375
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 167.36,
+        "area_px": 1199,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.32332,
+              23.420195
+            ],
+            [
+              85.339141,
+              23.420195
+            ],
+            [
+              85.339141,
+              23.401914
+            ],
+            [
+              85.32332,
+              23.401914
+            ],
+            [
+              85.32332,
+              23.420195
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 101.916,
+        "area_px": 730,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.288867,
+              23.370977
+            ],
+            [
+              85.308906,
+              23.370977
+            ],
+            [
+              85.308906,
+              23.355508
+            ],
+            [
+              85.288867,
+              23.355508
+            ],
+            [
+              85.288867,
+              23.370977
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 99.439,
+        "area_px": 712,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.329297,
+              23.415273
+            ],
+            [
+              85.344062,
+              23.415273
+            ],
+            [
+              85.344062,
+              23.399453
+            ],
+            [
+              85.329297,
+              23.399453
+            ],
+            [
+              85.329297,
+              23.415273
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 88.377,
+        "area_px": 633,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.300469,
+              23.380117
+            ],
+            [
+              85.308203,
+              23.380117
+            ],
+            [
+              85.308203,
+              23.372383
+            ],
+            [
+              85.300469,
+              23.372383
+            ],
+            [
+              85.300469,
+              23.380117
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 32.817,
+        "area_px": 235,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.283242,
+              23.383633
+            ],
+            [
+              85.28957,
+              23.383633
+            ],
+            [
+              85.28957,
+              23.379414
+            ],
+            [
+              85.283242,
+              23.379414
+            ],
+            [
+              85.283242,
+              23.383633
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 19.969,
+        "area_px": 143,
+        "claim": "change detected between the two dates",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "model": "adapter_C_change"
+      }
+    }
+  ]
+}

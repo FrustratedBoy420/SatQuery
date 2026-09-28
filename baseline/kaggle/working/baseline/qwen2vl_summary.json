@@ -1,0 +1,52 @@
+{
+  "model": "Qwen/Qwen2-VL-7B-Instruct",
+  "base_key": "qwen2vl",
+  "adapter": null,
+  "condition": "zero-shot",
+  "dataset": "VRSBench VQA",
+  "dataset_root": "/kaggle/working/VRSBench",
+  "split": "auto",
+  "seed": 0,
+  "limit": 20,
+  "dtype": "fp16",
+  "load_in_4bit": true,
+  "wall_seconds": 16.7,
+  "latency_p50": 0.633,
+  "n": 20,
+  "accuracy_exact": 0.6,
+  "accuracy_lenient": 0.65,
+  "by_type": {
+    "image": {
+      "n": 1,
+      "accuracy_exact": 1.0
+    },
+    "object category": {
+      "n": 1,
+      "accuracy_exact": 1.0
+    },
+    "object existence": {
+      "n": 5,
+      "accuracy_exact": 1.0
+    },
+    "object position": {
+      "n": 5,
+      "accuracy_exact": 0.4
+    },
+    "object quantity": {
+      "n": 4,
+      "accuracy_exact": 0.25
+    },
+    "object size": {
+      "n": 1,
+      "accuracy_exact": 0.0
+    },
+    "reasoning": {
+      "n": 1,
+      "accuracy_exact": 0.0
+    },
+    "scene type": {
+      "n": 2,
+      "accuracy_exact": 1.0
+    }
+  }
+}

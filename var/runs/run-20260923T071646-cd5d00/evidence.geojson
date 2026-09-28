@@ -1,0 +1,87 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.090434,
+              21.140506
+            ],
+            [
+              79.097211,
+              21.140506
+            ],
+            [
+              79.097211,
+              21.137511
+            ],
+            [
+              79.090434,
+              21.137511
+            ],
+            [
+              79.090434,
+              21.140506
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 2.52,
+        "area_px": 252,
+        "claim": "water regions located",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_B_grounding"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              79.098912,
+              21.139969
+            ],
+            [
+              79.10279,
+              21.139969
+            ],
+            [
+              79.10279,
+              21.137845
+            ],
+            [
+              79.098912,
+              21.137845
+            ],
+            [
+              79.098912,
+              21.139969
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_ha": 1.43,
+        "area_px": 143,
+        "claim": "water regions located",
+        "confidence": 0.97,
+        "modality": "optical",
+        "model": "adapter_B_grounding"
+      }
+    }
+  ]
+}

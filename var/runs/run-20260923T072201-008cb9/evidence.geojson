@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:satquery:def:crs:image-pixels"
+    }
+  },
+  "features": []
+}

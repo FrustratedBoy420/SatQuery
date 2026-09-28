@@ -1,0 +1,638 @@
+{
+  "query": "Describe the land-cover and major objects visible in this image.",
+  "answer": "The adapted model (M1) reads the scene as: Vegetation, water, bridge. Detected: 23 built-up regions (0.0 ha).",
+  "refused": false,
+  "abstained": false,
+  "confidence": 0.774,
+  "task": "single_vqa",
+  "tools": [
+    "rs_vqa"
+  ],
+  "params": {
+    "threshold": 0.45
+  },
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.774,
+    "abstain": false,
+    "count": 3,
+    "passing": 2,
+    "items": [
+      {
+        "claim": "insufficient bands to classify",
+        "value": null,
+        "unit": "",
+        "confidence": 0.0,
+        "modality": "derived",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [],
+        "conflicts": [],
+        "method": ""
+      },
+      {
+        "claim": "detected built regions",
+        "value": 23,
+        "unit": "regions",
+        "confidence": 0.949,
+        "modality": "optical",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 0,
+            "y0": 258,
+            "x1": 511,
+            "y1": 344,
+            "lon0": null,
+            "lat0": null,
+            "lon1": null,
+            "lat1": null,
+            "area_px": 23515,
+            "area_ha": 0.0
+          },
+          {
+            "x0": 94,
+            "y0": 355,
+            "x1": 210,
+            "y1": 440,
+            "lon0": null,
+            "lat0": null,
+            "lon1": null,
+            "lat1": null,
+            "area_px": 5011,
+            "area_ha": 0.0
+          },
+          {
+            "x0": 0,
+            "y0": 464,
+            "x1": 84,
+            "y1": 511,
+            "lon0": null,
+            "lat0": null,
+            "lon1": null,
+            "lat1": null,
+            "area_px": 2894,
+            "area_ha": 0.0
+          },
+          {
+            "x0": 114,
+            "y0": 310,
+            "x1": 511,
+            "y1": 402,
+            "lon0": null,
+            "lat0": null,
+            "lon1": null,
+            "lat1": null,
+            "area_px": 2812,
+            "area_ha": 0.0
+          },
+          {
+            "x0": 0,
+            "y0": 352,
+            "x1": 76,
+            "y1": 404,
+            "lon0": null,
+            "lat0": null,
+            "lon1": null,
+            "lat1": null,
+            "area_px": 2395,
+            "area_ha": 0.0
+          },
+          {
+            "x0": 178,
+            "y0": 59,
+            "x1": 246,
+            "y1": 145,
+            "lon0": null,
+            "lat0": null,
+            "lon1": null,
+            "lat1": null,
+            "area_px": 1380,
+            "area_ha": 0.0
+          },
+          {
+            "x0": 344,
+            "y0": 497,
+            "x1": 511,
+            "y1": 511,
+            "lon0": null,
+            "lat0": null,
+            "lon1": null,
+            "lat1": null,
+            "area_px": 656,
+            "area_ha": 0.0
+          },
+          {
+            "x0": 261,
+            "y0": 504,
+            "x1": 342,
+            "y1": 511,
+            "lon0": null,
+            "lat0": null,
+            "lon1": null,
+            "lat1": null,
+            "area_px": 247,
+            "area_ha": 0.0
+          }
+        ],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "upper threshold 0.5664 of a 3-class Otsu split",
+          "23 regions above 40 px",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "per-class grounding, summarised"
+      },
+      {
+        "claim": "M1 answer",
+        "value": "Vegetation, water, bridge",
+        "unit": "",
+        "confidence": 0.598,
+        "modality": "optical",
+        "source_model": "m1-rs-vqa-r2",
+        "source_version": "precomputed",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "served precomputed",
+          "measured: detected built regions = 23"
+        ],
+        "conflicts": [],
+        "method": "M1 \u2014 QLoRA-adapted Qwen2-VL-7B (precomputed)"
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "urn:satquery:def:crs:image-pixels"
+      }
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                0,
+                258
+              ],
+              [
+                512,
+                258
+              ],
+              [
+                512,
+                345
+              ],
+              [
+                0,
+                345
+              ],
+              [
+                0,
+                258
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 0.0,
+          "area_px": 23515,
+          "claim": "detected built regions",
+          "confidence": 0.949,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                94,
+                355
+              ],
+              [
+                211,
+                355
+              ],
+              [
+                211,
+                441
+              ],
+              [
+                94,
+                441
+              ],
+              [
+                94,
+                355
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 0.0,
+          "area_px": 5011,
+          "claim": "detected built regions",
+          "confidence": 0.949,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                0,
+                464
+              ],
+              [
+                85,
+                464
+              ],
+              [
+                85,
+                512
+              ],
+              [
+                0,
+                512
+              ],
+              [
+                0,
+                464
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 0.0,
+          "area_px": 2894,
+          "claim": "detected built regions",
+          "confidence": 0.949,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                114,
+                310
+              ],
+              [
+                512,
+                310
+              ],
+              [
+                512,
+                403
+              ],
+              [
+                114,
+                403
+              ],
+              [
+                114,
+                310
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 0.0,
+          "area_px": 2812,
+          "claim": "detected built regions",
+          "confidence": 0.949,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                0,
+                352
+              ],
+              [
+                77,
+                352
+              ],
+              [
+                77,
+                405
+              ],
+              [
+                0,
+                405
+              ],
+              [
+                0,
+                352
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 0.0,
+          "area_px": 2395,
+          "claim": "detected built regions",
+          "confidence": 0.949,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                178,
+                59
+              ],
+              [
+                247,
+                59
+              ],
+              [
+                247,
+                146
+              ],
+              [
+                178,
+                146
+              ],
+              [
+                178,
+                59
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 0.0,
+          "area_px": 1380,
+          "claim": "detected built regions",
+          "confidence": 0.949,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                344,
+                497
+              ],
+              [
+                512,
+                497
+              ],
+              [
+                512,
+                512
+              ],
+              [
+                344,
+                512
+              ],
+              [
+                344,
+                497
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 0.0,
+          "area_px": 656,
+          "claim": "detected built regions",
+          "confidence": 0.949,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                261,
+                504
+              ],
+              [
+                343,
+                504
+              ],
+              [
+                343,
+                512
+              ],
+              [
+                261,
+                512
+              ],
+              [
+                261,
+                504
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 0.0,
+          "area_px": 247,
+          "claim": "detected built regions",
+          "confidence": 0.949,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "1 raster(s) \u00b7 single",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 3,
+            "gsd_m": 217.42,
+            "georeferenced": false
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "single_vqa \u00b7 matched /describe/",
+      "ok": true,
+      "ms": 0.2,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "single satisfies rs_vqa",
+      "ok": true,
+      "ms": 0.3,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "rs_vqa (adapter_A_rs_general)",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.45",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Executed rs_vqa",
+      "detail": "3 evidence item(s) \u00b7 path neural+classical \u00b7 M1 precomputed",
+      "ok": true,
+      "ms": 122.5,
+      "data": {
+        "items": [
+          {
+            "claim": "insufficient bands to classify",
+            "value": null,
+            "confidence": 0.0,
+            "modality": "derived"
+          },
+          {
+            "claim": "detected built regions",
+            "value": 23,
+            "confidence": 0.949,
+            "modality": "optical"
+          },
+          {
+            "claim": "M1 answer",
+            "value": "Vegetation, water, bridge",
+            "confidence": 0.598,
+            "modality": "optical"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Confidence",
+      "detail": "0.77 \u00b7 2/3 items passed the gate",
+      "ok": true,
+      "ms": 122.6,
+      "data": {}
+    },
+    {
+      "step": "Evidence returned",
+      "detail": "8 feature(s) \u00b7 pixel space \u2014 the imagery is not georeferenced",
+      "ok": true,
+      "ms": 122.7,
+      "data": {
+        "engine": "neural+classical",
+        "crs": "urn:satquery:def:crs:image-pixels"
+      }
+    }
+  ],
+  "manifest": {
+    "modality": "single",
+    "count": 1,
+    "rasters": [
+      {
+        "source": "source.png",
+        "sensor": "optical",
+        "bands": 3,
+        "band_names": [
+          "red",
+          "green",
+          "blue"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": false,
+        "geotransform": [
+          0.0,
+          0.001953125,
+          0.0,
+          0.0,
+          0.0,
+          -0.001953125
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 217.42,
+        "bounds": [
+          0.0,
+          -1.0,
+          1.0,
+          0.0
+        ],
+        "centre": [
+          -0.5,
+          0.5
+        ],
+        "acquired": "",
+        "role": "optical"
+      }
+    ],
+    "georeferenced": false,
+    "sensors": [
+      "optical"
+    ]
+  },
+  "elapsed_ms": 123.1,
+  "version": "0.4.0",
+  "engine": "neural+classical",
+  "run_id": "run-20260923T070229-c4437d",
+  "created": "2026-09-23T07:02:29Z",
+  "precomputed": true
+}

@@ -1,0 +1,1156 @@
+{
+  "query": "Describe the land-cover and major objects visible in this image.",
+  "answer": "Dominant land cover is vegetation. Shares: vegetation: 50.1%; bare soil: 47.0%; built-up: 7.9%; water: 2.9%. Detected: 6 built-up regions (2574.9 ha); 2 water regions (880.7 ha); 13 vegetation regions (17800.9 ha).",
+  "refused": false,
+  "abstained": false,
+  "confidence": 0.97,
+  "task": "single_vqa",
+  "tools": [
+    "rs_vqa"
+  ],
+  "params": {
+    "threshold": 0.45
+  },
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.97,
+    "abstain": false,
+    "count": 5,
+    "passing": 4,
+    "items": [
+      {
+        "claim": "dominant land cover",
+        "value": "vegetation",
+        "unit": "",
+        "confidence": 0.675,
+        "modality": "fused",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "vegetation: 50.1%",
+          "bare soil: 47.0%",
+          "built-up: 7.9%",
+          "water: 2.9%"
+        ],
+        "conflicts": [],
+        "method": "spectral index shares and backscatter share, compared"
+      },
+      {
+        "claim": "detected built regions",
+        "value": 6,
+        "unit": "regions",
+        "confidence": 0.97,
+        "modality": "sar",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 281,
+            "y0": 56,
+            "x1": 434,
+            "y1": 210,
+            "lon0": 85.338789,
+            "lat0": 23.480313,
+            "lon1": 85.39293,
+            "lat1": 23.42582,
+            "area_px": 13817,
+            "area_ha": 1928.398
+          },
+          {
+            "x0": 60,
+            "y0": 152,
+            "x1": 105,
+            "y1": 197,
+            "lon0": 85.261094,
+            "lat0": 23.446562,
+            "lon1": 85.277266,
+            "lat1": 23.430391,
+            "area_px": 1608,
+            "area_ha": 224.449
+          },
+          {
+            "x0": 123,
+            "y0": 372,
+            "x1": 184,
+            "y1": 400,
+            "lon0": 85.283242,
+            "lat0": 23.369219,
+            "lon1": 85.305039,
+            "lat1": 23.359023,
+            "area_px": 1097,
+            "area_ha": 153.208
+          },
+          {
+            "x0": 128,
+            "y0": 336,
+            "x1": 184,
+            "y1": 365,
+            "lon0": 85.285,
+            "lat0": 23.381875,
+            "lon1": 85.305039,
+            "lat1": 23.371328,
+            "area_px": 1048,
+            "area_ha": 146.351
+          },
+          {
+            "x0": 247,
+            "y0": 236,
+            "x1": 274,
+            "y1": 268,
+            "lon0": 85.326836,
+            "lat0": 23.417031,
+            "lon1": 85.33668,
+            "lat1": 23.40543,
+            "area_px": 486,
+            "area_ha": 67.851
+          },
+          {
+            "x0": 261,
+            "y0": 249,
+            "x1": 286,
+            "y1": 276,
+            "lon0": 85.331758,
+            "lat0": 23.412461,
+            "lon1": 85.340898,
+            "lat1": 23.402617,
+            "area_px": 385,
+            "area_ha": 53.752
+          }
+        ],
+        "mask_area_ha": 2574.866,
+        "supporting": [
+          "upper threshold 0.5932 of a 3-class Otsu split",
+          "6 regions above 40 px",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "per-class grounding, summarised"
+      },
+      {
+        "claim": "detected water regions",
+        "value": 2,
+        "unit": "regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 0,
+            "y0": 244,
+            "x1": 278,
+            "y1": 379,
+            "lon0": 85.24,
+            "lat0": 23.414219,
+            "lon1": 85.338086,
+            "lat1": 23.366406,
+            "area_px": 3986,
+            "area_ha": 556.578
+          },
+          {
+            "x0": 347,
+            "y0": 269,
+            "x1": 511,
+            "y1": 367,
+            "lon0": 85.361992,
+            "lat0": 23.40543,
+            "lon1": 85.42,
+            "lat1": 23.370625,
+            "area_px": 2321,
+            "area_ha": 324.095
+          }
+        ],
+        "mask_area_ha": 880.731,
+        "supporting": [
+          "upper threshold 0.1851 of a 3-class Otsu split",
+          "2 regions above 60 px",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "per-class grounding, summarised"
+      },
+      {
+        "claim": "detected vegetation regions",
+        "value": 13,
+        "unit": "regions",
+        "confidence": 0.97,
+        "modality": "optical",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 233,
+            "y0": 237,
+            "x1": 511,
+            "y1": 511,
+            "lon0": 85.321914,
+            "lat0": 23.41668,
+            "lon1": 85.42,
+            "lat1": 23.32,
+            "area_px": 39755,
+            "area_ha": 5552.043
+          },
+          {
+            "x0": 0,
+            "y0": 0,
+            "x1": 279,
+            "y1": 284,
+            "lon0": 85.24,
+            "lat0": 23.5,
+            "lon1": 85.338437,
+            "lat1": 23.399805,
+            "area_px": 27682,
+            "area_ha": 3863.589
+          },
+          {
+            "x0": 326,
+            "y0": 0,
+            "x1": 511,
+            "y1": 170,
+            "lon0": 85.354609,
+            "lat0": 23.5,
+            "lon1": 85.42,
+            "lat1": 23.439883,
+            "area_px": 14363,
+            "area_ha": 2004.346
+          },
+          {
+            "x0": 140,
+            "y0": 171,
+            "x1": 284,
+            "y1": 304,
+            "lon0": 85.289219,
+            "lat0": 23.439883,
+            "lon1": 85.340195,
+            "lat1": 23.392773,
+            "area_px": 10940,
+            "area_ha": 1527.288
+          },
+          {
+            "x0": 187,
+            "y0": 399,
+            "x1": 279,
+            "y1": 511,
+            "lon0": 85.305742,
+            "lat0": 23.359727,
+            "lon1": 85.338437,
+            "lat1": 23.32,
+            "area_px": 7885,
+            "area_ha": 1101.428
+          },
+          {
+            "x0": 0,
+            "y0": 349,
+            "x1": 93,
+            "y1": 455,
+            "lon0": 85.24,
+            "lat0": 23.377305,
+            "lon1": 85.273047,
+            "lat1": 23.339688,
+            "area_px": 7865,
+            "area_ha": 1098.48
+          },
+          {
+            "x0": 9,
+            "y0": 285,
+            "x1": 139,
+            "y1": 359,
+            "lon0": 85.243164,
+            "lat0": 23.399805,
+            "lon1": 85.289219,
+            "lat1": 23.373438,
+            "area_px": 6414,
+            "area_ha": 895.633
+          },
+          {
+            "x0": 140,
+            "y0": 342,
+            "x1": 232,
+            "y1": 455,
+            "lon0": 85.289219,
+            "lat0": 23.379766,
+            "lon1": 85.321914,
+            "lat1": 23.339688,
+            "area_px": 4951,
+            "area_ha": 691.484
+          }
+        ],
+        "mask_area_ha": 17800.934,
+        "supporting": [
+          "upper threshold 0.4375 of a 3-class Otsu split",
+          "13 regions above 120 px",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "per-class grounding, summarised"
+      },
+      {
+        "claim": "M1 answer",
+        "value": "Green and brown patches",
+        "unit": "",
+        "confidence": 0.246,
+        "modality": "optical",
+        "source_model": "m1-rs-vqa-r2",
+        "source_version": "precomputed",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "served precomputed",
+          "measured: dominant land cover = vegetation"
+        ],
+        "conflicts": [],
+        "method": "M1 \u2014 QLoRA-adapted Qwen2-VL-7B (precomputed)"
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.338789,
+                23.480313
+              ],
+              [
+                85.39293,
+                23.480313
+              ],
+              [
+                85.39293,
+                23.42582
+              ],
+              [
+                85.338789,
+                23.42582
+              ],
+              [
+                85.338789,
+                23.480313
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 1928.398,
+          "area_px": 13817,
+          "claim": "detected built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.261094,
+                23.446562
+              ],
+              [
+                85.277266,
+                23.446562
+              ],
+              [
+                85.277266,
+                23.430391
+              ],
+              [
+                85.261094,
+                23.430391
+              ],
+              [
+                85.261094,
+                23.446562
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 224.449,
+          "area_px": 1608,
+          "claim": "detected built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.283242,
+                23.369219
+              ],
+              [
+                85.305039,
+                23.369219
+              ],
+              [
+                85.305039,
+                23.359023
+              ],
+              [
+                85.283242,
+                23.359023
+              ],
+              [
+                85.283242,
+                23.369219
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 153.208,
+          "area_px": 1097,
+          "claim": "detected built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.285,
+                23.381875
+              ],
+              [
+                85.305039,
+                23.381875
+              ],
+              [
+                85.305039,
+                23.371328
+              ],
+              [
+                85.285,
+                23.371328
+              ],
+              [
+                85.285,
+                23.381875
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 146.351,
+          "area_px": 1048,
+          "claim": "detected built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.326836,
+                23.417031
+              ],
+              [
+                85.33668,
+                23.417031
+              ],
+              [
+                85.33668,
+                23.40543
+              ],
+              [
+                85.326836,
+                23.40543
+              ],
+              [
+                85.326836,
+                23.417031
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 67.851,
+          "area_px": 486,
+          "claim": "detected built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.331758,
+                23.412461
+              ],
+              [
+                85.340898,
+                23.412461
+              ],
+              [
+                85.340898,
+                23.402617
+              ],
+              [
+                85.331758,
+                23.402617
+              ],
+              [
+                85.331758,
+                23.412461
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 53.752,
+          "area_px": 385,
+          "claim": "detected built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.24,
+                23.414219
+              ],
+              [
+                85.338086,
+                23.414219
+              ],
+              [
+                85.338086,
+                23.366406
+              ],
+              [
+                85.24,
+                23.366406
+              ],
+              [
+                85.24,
+                23.414219
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 556.578,
+          "area_px": 3986,
+          "claim": "detected water regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.361992,
+                23.40543
+              ],
+              [
+                85.42,
+                23.40543
+              ],
+              [
+                85.42,
+                23.370625
+              ],
+              [
+                85.361992,
+                23.370625
+              ],
+              [
+                85.361992,
+                23.40543
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 324.095,
+          "area_px": 2321,
+          "claim": "detected water regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.321914,
+                23.41668
+              ],
+              [
+                85.42,
+                23.41668
+              ],
+              [
+                85.42,
+                23.32
+              ],
+              [
+                85.321914,
+                23.32
+              ],
+              [
+                85.321914,
+                23.41668
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 5552.043,
+          "area_px": 39755,
+          "claim": "detected vegetation regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.24,
+                23.5
+              ],
+              [
+                85.338437,
+                23.5
+              ],
+              [
+                85.338437,
+                23.399805
+              ],
+              [
+                85.24,
+                23.399805
+              ],
+              [
+                85.24,
+                23.5
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 3863.589,
+          "area_px": 27682,
+          "claim": "detected vegetation regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.354609,
+                23.5
+              ],
+              [
+                85.42,
+                23.5
+              ],
+              [
+                85.42,
+                23.439883
+              ],
+              [
+                85.354609,
+                23.439883
+              ],
+              [
+                85.354609,
+                23.5
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 2004.346,
+          "area_px": 14363,
+          "claim": "detected vegetation regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.289219,
+                23.439883
+              ],
+              [
+                85.340195,
+                23.439883
+              ],
+              [
+                85.340195,
+                23.392773
+              ],
+              [
+                85.289219,
+                23.392773
+              ],
+              [
+                85.289219,
+                23.439883
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 1527.288,
+          "area_px": 10940,
+          "claim": "detected vegetation regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.305742,
+                23.359727
+              ],
+              [
+                85.338437,
+                23.359727
+              ],
+              [
+                85.338437,
+                23.32
+              ],
+              [
+                85.305742,
+                23.32
+              ],
+              [
+                85.305742,
+                23.359727
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 1101.428,
+          "area_px": 7885,
+          "claim": "detected vegetation regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.24,
+                23.377305
+              ],
+              [
+                85.273047,
+                23.377305
+              ],
+              [
+                85.273047,
+                23.339688
+              ],
+              [
+                85.24,
+                23.339688
+              ],
+              [
+                85.24,
+                23.377305
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 1098.48,
+          "area_px": 7865,
+          "claim": "detected vegetation regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.243164,
+                23.399805
+              ],
+              [
+                85.289219,
+                23.399805
+              ],
+              [
+                85.289219,
+                23.373438
+              ],
+              [
+                85.243164,
+                23.373438
+              ],
+              [
+                85.243164,
+                23.399805
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 895.633,
+          "area_px": 6414,
+          "claim": "detected vegetation regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.289219,
+                23.379766
+              ],
+              [
+                85.321914,
+                23.379766
+              ],
+              [
+                85.321914,
+                23.339688
+              ],
+              [
+                85.289219,
+                23.339688
+              ],
+              [
+                85.289219,
+                23.379766
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 691.484,
+          "area_px": 4951,
+          "claim": "detected vegetation regions",
+          "confidence": 0.97,
+          "modality": "optical",
+          "model": "adapter_A_rs_general"
+        }
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "2 raster(s) \u00b7 optical_sar",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "sar",
+            "sensor": "sar",
+            "crs": "EPSG:4326",
+            "bands": 2,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "single_vqa \u00b7 matched /describe/",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "optical_sar satisfies rs_vqa",
+      "ok": true,
+      "ms": 0.3,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "rs_vqa (adapter_A_rs_general)",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.45",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Co-registration checked",
+      "detail": "optical/sar \u00b7 offset 0.00 px (tolerance 2 px)",
+      "ok": true,
+      "ms": 44.8,
+      "data": {
+        "offset_px": 0.0,
+        "geometric_px": 0.0,
+        "phase_px": 0.0,
+        "same_crs": true,
+        "same_shape": true
+      }
+    },
+    {
+      "step": "Executed rs_vqa",
+      "detail": "5 evidence item(s) \u00b7 path classical \u00b7 M1 answered 'Green and brown patches' at 0.25, below the 0.45 gate \u2014 not used",
+      "ok": true,
+      "ms": 425.3,
+      "data": {
+        "items": [
+          {
+            "claim": "dominant land cover",
+            "value": "vegetation",
+            "confidence": 0.675,
+            "modality": "fused"
+          },
+          {
+            "claim": "detected built regions",
+            "value": 6,
+            "confidence": 0.97,
+            "modality": "sar"
+          },
+          {
+            "claim": "detected water regions",
+            "value": 2,
+            "confidence": 0.97,
+            "modality": "optical"
+          },
+          {
+            "claim": "detected vegetation regions",
+            "value": 13,
+            "confidence": 0.97,
+            "modality": "optical"
+          },
+          {
+            "claim": "M1 answer",
+            "value": "Green and brown patches",
+            "confidence": 0.246,
+            "modality": "optical"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Confidence",
+      "detail": "0.97 \u00b7 4/5 items passed the gate",
+      "ok": true,
+      "ms": 425.4,
+      "data": {}
+    },
+    {
+      "step": "Evidence returned",
+      "detail": "16 feature(s) \u00b7 EPSG:4326",
+      "ok": true,
+      "ms": 425.7,
+      "data": {
+        "engine": "classical",
+        "crs": "EPSG:4326"
+      }
+    }
+  ],
+  "manifest": {
+    "modality": "optical_sar",
+    "count": 2,
+    "rasters": [
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "optical"
+      },
+      {
+        "source": "kharagpur_sar.tif",
+        "sensor": "sar",
+        "bands": 2,
+        "band_names": [
+          "vv",
+          "vh"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-1 GRD (synthetic)",
+        "looks": 4,
+        "polarisation": "VV+VH",
+        "role": "sar"
+      }
+    ],
+    "georeferenced": true,
+    "sensors": [
+      "optical",
+      "sar"
+    ]
+  },
+  "elapsed_ms": 426.6,
+  "version": "0.4.0",
+  "engine": "classical",
+  "run_id": "run-20260923T070148-040a28",
+  "created": "2026-09-23T07:01:48Z",
+  "precomputed": false
+}

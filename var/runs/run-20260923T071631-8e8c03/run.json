@@ -1,0 +1,876 @@
+{
+  "query": "What changed between these two dates?",
+  "answer": "10 changed regions were detected between the two dates, covering 1663.11 ha. Vegetation lost inside the changed region \u2014 consistent with construction (mean NDVI delta -0.707). Built-up share rose by 4.37 percentage points.",
+  "refused": false,
+  "abstained": false,
+  "confidence": 0.97,
+  "task": "temporal_change",
+  "tools": [
+    "change_vqa"
+  ],
+  "params": {
+    "threshold": 0.45
+  },
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.97,
+    "abstain": false,
+    "count": 2,
+    "passing": 2,
+    "items": [
+      {
+        "claim": "change detected between the two dates",
+        "value": 10,
+        "unit": "regions",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "source_model": "adapter_C_change",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 325,
+            "y0": 183,
+            "x1": 419,
+            "y1": 238,
+            "lon0": 85.354258,
+            "lat0": 23.435664,
+            "lon1": 85.387656,
+            "lat1": 23.415977,
+            "area_px": 2698,
+            "area_ha": 376.63
+          },
+          {
+            "x0": 394,
+            "y0": 37,
+            "x1": 463,
+            "y1": 130,
+            "lon0": 85.378516,
+            "lat0": 23.486992,
+            "lon1": 85.403125,
+            "lat1": 23.453945,
+            "area_px": 2389,
+            "area_ha": 333.382
+          },
+          {
+            "x0": 325,
+            "y0": 29,
+            "x1": 388,
+            "y1": 57,
+            "lon0": 85.354258,
+            "lat0": 23.489805,
+            "lon1": 85.376758,
+            "lat1": 23.479609,
+            "area_px": 1642,
+            "area_ha": 229.114
+          },
+          {
+            "x0": 256,
+            "y0": 66,
+            "x1": 290,
+            "y1": 200,
+            "lon0": 85.33,
+            "lat0": 23.476797,
+            "lon1": 85.342305,
+            "lat1": 23.429336,
+            "area_px": 1513,
+            "area_ha": 211.165
+          },
+          {
+            "x0": 50,
+            "y0": 144,
+            "x1": 114,
+            "y1": 206,
+            "lon0": 85.257578,
+            "lat0": 23.449375,
+            "lon1": 85.28043,
+            "lat1": 23.427227,
+            "area_px": 1199,
+            "area_ha": 167.36
+          },
+          {
+            "x0": 237,
+            "y0": 227,
+            "x1": 281,
+            "y1": 278,
+            "lon0": 85.32332,
+            "lat0": 23.420195,
+            "lon1": 85.339141,
+            "lat1": 23.401914,
+            "area_px": 730,
+            "area_ha": 101.916
+          },
+          {
+            "x0": 139,
+            "y0": 367,
+            "x1": 195,
+            "y1": 410,
+            "lon0": 85.288867,
+            "lat0": 23.370977,
+            "lon1": 85.308906,
+            "lat1": 23.355508,
+            "area_px": 712,
+            "area_ha": 99.439
+          },
+          {
+            "x0": 254,
+            "y0": 241,
+            "x1": 295,
+            "y1": 285,
+            "lon0": 85.329297,
+            "lat0": 23.415273,
+            "lon1": 85.344062,
+            "lat1": 23.399453,
+            "area_px": 633,
+            "area_ha": 88.377
+          },
+          {
+            "x0": 172,
+            "y0": 341,
+            "x1": 193,
+            "y1": 362,
+            "lon0": 85.300469,
+            "lat0": 23.380117,
+            "lon1": 85.308203,
+            "lat1": 23.372383,
+            "area_px": 235,
+            "area_ha": 32.817
+          },
+          {
+            "x0": 123,
+            "y0": 331,
+            "x1": 140,
+            "y1": 342,
+            "lon0": 85.283242,
+            "lat0": 23.383633,
+            "lon1": 85.28957,
+            "lat1": 23.379414,
+            "area_px": 143,
+            "area_ha": 19.969
+          }
+        ],
+        "mask_area_ha": 1663.112,
+        "supporting": [
+          "changed area 1663.11 ha of 36598.60 ha (4.55%)",
+          "otsu threshold 0.3097",
+          "co-registration offset 0.00 px",
+          "vegetation lost inside the changed region \u2014 consistent with construction (mean NDVI delta -0.707)",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "change vector analysis, Otsu threshold, morphological clean"
+      },
+      {
+        "claim": "built-up area trend",
+        "value": 4.374,
+        "unit": "%",
+        "confidence": 0.97,
+        "modality": "temporal",
+        "source_model": "adapter_C_change",
+        "source_version": "0.1.0",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "vegetation lost inside the changed region \u2014 consistent with construction (mean NDVI delta -0.707)"
+        ],
+        "conflicts": [],
+        "method": "built-up share at T2 minus built-up share at T1"
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.354258,
+                23.435664
+              ],
+              [
+                85.387656,
+                23.435664
+              ],
+              [
+                85.387656,
+                23.415977
+              ],
+              [
+                85.354258,
+                23.415977
+              ],
+              [
+                85.354258,
+                23.435664
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 376.63,
+          "area_px": 2698,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.378516,
+                23.486992
+              ],
+              [
+                85.403125,
+                23.486992
+              ],
+              [
+                85.403125,
+                23.453945
+              ],
+              [
+                85.378516,
+                23.453945
+              ],
+              [
+                85.378516,
+                23.486992
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 333.382,
+          "area_px": 2389,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.354258,
+                23.489805
+              ],
+              [
+                85.376758,
+                23.489805
+              ],
+              [
+                85.376758,
+                23.479609
+              ],
+              [
+                85.354258,
+                23.479609
+              ],
+              [
+                85.354258,
+                23.489805
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 229.114,
+          "area_px": 1642,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.33,
+                23.476797
+              ],
+              [
+                85.342305,
+                23.476797
+              ],
+              [
+                85.342305,
+                23.429336
+              ],
+              [
+                85.33,
+                23.429336
+              ],
+              [
+                85.33,
+                23.476797
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 211.165,
+          "area_px": 1513,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.257578,
+                23.449375
+              ],
+              [
+                85.28043,
+                23.449375
+              ],
+              [
+                85.28043,
+                23.427227
+              ],
+              [
+                85.257578,
+                23.427227
+              ],
+              [
+                85.257578,
+                23.449375
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 167.36,
+          "area_px": 1199,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.32332,
+                23.420195
+              ],
+              [
+                85.339141,
+                23.420195
+              ],
+              [
+                85.339141,
+                23.401914
+              ],
+              [
+                85.32332,
+                23.401914
+              ],
+              [
+                85.32332,
+                23.420195
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 101.916,
+          "area_px": 730,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.288867,
+                23.370977
+              ],
+              [
+                85.308906,
+                23.370977
+              ],
+              [
+                85.308906,
+                23.355508
+              ],
+              [
+                85.288867,
+                23.355508
+              ],
+              [
+                85.288867,
+                23.370977
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 99.439,
+          "area_px": 712,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.329297,
+                23.415273
+              ],
+              [
+                85.344062,
+                23.415273
+              ],
+              [
+                85.344062,
+                23.399453
+              ],
+              [
+                85.329297,
+                23.399453
+              ],
+              [
+                85.329297,
+                23.415273
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 88.377,
+          "area_px": 633,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.300469,
+                23.380117
+              ],
+              [
+                85.308203,
+                23.380117
+              ],
+              [
+                85.308203,
+                23.372383
+              ],
+              [
+                85.300469,
+                23.372383
+              ],
+              [
+                85.300469,
+                23.380117
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 32.817,
+          "area_px": 235,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.283242,
+                23.383633
+              ],
+              [
+                85.28957,
+                23.383633
+              ],
+              [
+                85.28957,
+                23.379414
+              ],
+              [
+                85.283242,
+                23.379414
+              ],
+              [
+                85.283242,
+                23.383633
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 19.969,
+          "area_px": 143,
+          "claim": "change detected between the two dates",
+          "confidence": 0.97,
+          "modality": "temporal",
+          "model": "adapter_C_change"
+        }
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "4 raster(s) \u00b7 bi_temporal",
+      "ok": true,
+      "ms": 0.2,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "sar",
+            "sensor": "sar",
+            "crs": "EPSG:4326",
+            "bands": 2,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "t1",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "t2",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "temporal_change \u00b7 matched /changed/",
+      "ok": true,
+      "ms": 0.2,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "bi_temporal satisfies change_vqa",
+      "ok": true,
+      "ms": 0.2,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "change_vqa (adapter_C_change)",
+      "ok": true,
+      "ms": 0.2,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.45",
+      "ok": true,
+      "ms": 0.3,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Co-registration checked",
+      "detail": "t1/t2 \u00b7 offset 0.00 px (tolerance 2 px)",
+      "ok": true,
+      "ms": 38.9,
+      "data": {
+        "offset_px": 0.0,
+        "geometric_px": 0.0,
+        "phase_px": 0.0,
+        "same_crs": true,
+        "same_shape": true
+      }
+    },
+    {
+      "step": "Executed change_vqa",
+      "detail": "2 evidence item(s) \u00b7 path classical",
+      "ok": true,
+      "ms": 162.5,
+      "data": {
+        "items": [
+          {
+            "claim": "change detected between the two dates",
+            "value": 10,
+            "confidence": 0.97,
+            "modality": "temporal"
+          },
+          {
+            "claim": "built-up area trend",
+            "value": 4.374,
+            "confidence": 0.97,
+            "modality": "temporal"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Confidence",
+      "detail": "0.97 \u00b7 2/2 items passed the gate",
+      "ok": true,
+      "ms": 162.5,
+      "data": {}
+    },
+    {
+      "step": "Evidence returned",
+      "detail": "10 feature(s) \u00b7 EPSG:4326",
+      "ok": true,
+      "ms": 162.6,
+      "data": {
+        "engine": "classical",
+        "crs": "EPSG:4326"
+      }
+    }
+  ],
+  "manifest": {
+    "modality": "bi_temporal",
+    "count": 4,
+    "rasters": [
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "optical"
+      },
+      {
+        "source": "kharagpur_sar.tif",
+        "sensor": "sar",
+        "bands": 2,
+        "band_names": [
+          "vv",
+          "vh"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-1 GRD (synthetic)",
+        "looks": 4,
+        "polarisation": "VV+VH",
+        "role": "sar"
+      },
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2022-01-18T05:41:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "t1"
+      },
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "t2"
+      }
+    ],
+    "georeferenced": true,
+    "sensors": [
+      "optical",
+      "sar"
+    ]
+  },
+  "elapsed_ms": 166.0,
+  "version": "0.4.0",
+  "engine": "classical",
+  "run_id": "run-20260923T071631-8e8c03",
+  "created": "2026-09-23T07:16:31Z",
+  "precomputed": false
+}

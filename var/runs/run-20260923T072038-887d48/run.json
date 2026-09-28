@@ -1,0 +1,594 @@
+{
+  "query": "How many built-up areas are visible?",
+  "answer": "6. Total extent 2574.87 ha. Note: M1 counted 2; measurement counts 6 (connected-component labelling over the thresholded index)",
+  "refused": false,
+  "abstained": false,
+  "confidence": 0.89,
+  "task": "single_vqa",
+  "tools": [
+    "rs_vqa"
+  ],
+  "params": {
+    "threshold": 0.45
+  },
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.89,
+    "abstain": false,
+    "count": 2,
+    "passing": 2,
+    "items": [
+      {
+        "claim": "count of built regions",
+        "value": 6,
+        "unit": "regions",
+        "confidence": 0.97,
+        "modality": "sar",
+        "source_model": "adapter_A_rs_general",
+        "source_version": "0.1.0",
+        "boxes": [
+          {
+            "x0": 281,
+            "y0": 56,
+            "x1": 434,
+            "y1": 210,
+            "lon0": 85.338789,
+            "lat0": 23.480313,
+            "lon1": 85.39293,
+            "lat1": 23.42582,
+            "area_px": 13817,
+            "area_ha": 1928.398
+          },
+          {
+            "x0": 60,
+            "y0": 152,
+            "x1": 105,
+            "y1": 197,
+            "lon0": 85.261094,
+            "lat0": 23.446562,
+            "lon1": 85.277266,
+            "lat1": 23.430391,
+            "area_px": 1608,
+            "area_ha": 224.449
+          },
+          {
+            "x0": 123,
+            "y0": 372,
+            "x1": 184,
+            "y1": 400,
+            "lon0": 85.283242,
+            "lat0": 23.369219,
+            "lon1": 85.305039,
+            "lat1": 23.359023,
+            "area_px": 1097,
+            "area_ha": 153.208
+          },
+          {
+            "x0": 128,
+            "y0": 336,
+            "x1": 184,
+            "y1": 365,
+            "lon0": 85.285,
+            "lat0": 23.381875,
+            "lon1": 85.305039,
+            "lat1": 23.371328,
+            "area_px": 1048,
+            "area_ha": 146.351
+          },
+          {
+            "x0": 247,
+            "y0": 236,
+            "x1": 274,
+            "y1": 268,
+            "lon0": 85.326836,
+            "lat0": 23.417031,
+            "lon1": 85.33668,
+            "lat1": 23.40543,
+            "area_px": 486,
+            "area_ha": 67.851
+          },
+          {
+            "x0": 261,
+            "y0": 249,
+            "x1": 286,
+            "y1": 276,
+            "lon0": 85.331758,
+            "lat0": 23.412461,
+            "lon1": 85.340898,
+            "lat1": 23.402617,
+            "area_px": 385,
+            "area_ha": 53.752
+          }
+        ],
+        "mask_area_ha": 2574.866,
+        "supporting": [
+          "upper threshold 0.5932 of a 3-class Otsu split",
+          "6 regions above 40 px",
+          "path: classical"
+        ],
+        "conflicts": [],
+        "method": "connected-component labelling over the thresholded index"
+      },
+      {
+        "claim": "M1 answer",
+        "value": "2",
+        "unit": "",
+        "confidence": 0.531,
+        "modality": "optical",
+        "source_model": "m1-rs-vqa-r2",
+        "source_version": "precomputed",
+        "boxes": [],
+        "mask_area_ha": 0.0,
+        "supporting": [
+          "served precomputed",
+          "measured: count of built regions = 6"
+        ],
+        "conflicts": [
+          "M1 counted 2; measurement counts 6 (connected-component labelling over the thresholded index)"
+        ],
+        "method": "M1 \u2014 QLoRA-adapted Qwen2-VL-7B (precomputed)"
+      }
+    ]
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.338789,
+                23.480313
+              ],
+              [
+                85.39293,
+                23.480313
+              ],
+              [
+                85.39293,
+                23.42582
+              ],
+              [
+                85.338789,
+                23.42582
+              ],
+              [
+                85.338789,
+                23.480313
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 1928.398,
+          "area_px": 13817,
+          "claim": "count of built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.261094,
+                23.446562
+              ],
+              [
+                85.277266,
+                23.446562
+              ],
+              [
+                85.277266,
+                23.430391
+              ],
+              [
+                85.261094,
+                23.430391
+              ],
+              [
+                85.261094,
+                23.446562
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 224.449,
+          "area_px": 1608,
+          "claim": "count of built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.283242,
+                23.369219
+              ],
+              [
+                85.305039,
+                23.369219
+              ],
+              [
+                85.305039,
+                23.359023
+              ],
+              [
+                85.283242,
+                23.359023
+              ],
+              [
+                85.283242,
+                23.369219
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 153.208,
+          "area_px": 1097,
+          "claim": "count of built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.285,
+                23.381875
+              ],
+              [
+                85.305039,
+                23.381875
+              ],
+              [
+                85.305039,
+                23.371328
+              ],
+              [
+                85.285,
+                23.371328
+              ],
+              [
+                85.285,
+                23.381875
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 146.351,
+          "area_px": 1048,
+          "claim": "count of built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.326836,
+                23.417031
+              ],
+              [
+                85.33668,
+                23.417031
+              ],
+              [
+                85.33668,
+                23.40543
+              ],
+              [
+                85.326836,
+                23.40543
+              ],
+              [
+                85.326836,
+                23.417031
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 67.851,
+          "area_px": 486,
+          "claim": "count of built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                85.331758,
+                23.412461
+              ],
+              [
+                85.340898,
+                23.412461
+              ],
+              [
+                85.340898,
+                23.402617
+              ],
+              [
+                85.331758,
+                23.402617
+              ],
+              [
+                85.331758,
+                23.412461
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "area_ha": 53.752,
+          "area_px": 385,
+          "claim": "count of built regions",
+          "confidence": 0.97,
+          "modality": "sar",
+          "model": "adapter_A_rs_general"
+        }
+      }
+    ]
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "2 raster(s) \u00b7 optical_sar",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          },
+          {
+            "role": "sar",
+            "sensor": "sar",
+            "crs": "EPSG:4326",
+            "bands": 2,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "single_vqa \u00b7 matched /how many/",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "optical_sar satisfies rs_vqa",
+      "ok": true,
+      "ms": 0.1,
+      "data": {}
+    },
+    {
+      "step": "Tool selected",
+      "detail": "rs_vqa (adapter_A_rs_general)",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "registry_size": 4
+      }
+    },
+    {
+      "step": "Parameters",
+      "detail": "threshold=0.45",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "permitted": [
+          "threshold"
+        ]
+      }
+    },
+    {
+      "step": "Co-registration checked",
+      "detail": "optical/sar \u00b7 offset 0.00 px (tolerance 2 px)",
+      "ok": true,
+      "ms": 55.4,
+      "data": {
+        "offset_px": 0.0,
+        "geometric_px": 0.0,
+        "phase_px": 0.0,
+        "same_crs": true,
+        "same_shape": true
+      }
+    },
+    {
+      "step": "Executed rs_vqa",
+      "detail": "2 evidence item(s) \u00b7 path neural+classical \u00b7 M1 precomputed \u00b7 conflict with measurement recorded",
+      "ok": true,
+      "ms": 276.9,
+      "data": {
+        "items": [
+          {
+            "claim": "count of built regions",
+            "value": 6,
+            "confidence": 0.97,
+            "modality": "sar"
+          },
+          {
+            "claim": "M1 answer",
+            "value": "2",
+            "confidence": 0.531,
+            "modality": "optical"
+          }
+        ]
+      }
+    },
+    {
+      "step": "Conflicts recorded",
+      "detail": "1 \u2014 confidence reduced",
+      "ok": true,
+      "ms": 276.9,
+      "data": {
+        "conflicts": [
+          "M1 counted 2; measurement counts 6 (connected-component labelling over the thresholded index)"
+        ]
+      }
+    },
+    {
+      "step": "Confidence",
+      "detail": "0.89 \u00b7 2/2 items passed the gate",
+      "ok": true,
+      "ms": 277.0,
+      "data": {}
+    },
+    {
+      "step": "Evidence returned",
+      "detail": "6 feature(s) \u00b7 EPSG:4326",
+      "ok": true,
+      "ms": 277.0,
+      "data": {
+        "engine": "neural+classical",
+        "crs": "EPSG:4326"
+      }
+    }
+  ],
+  "manifest": {
+    "modality": "optical_sar",
+    "count": 2,
+    "rasters": [
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "optical"
+      },
+      {
+        "source": "kharagpur_sar.tif",
+        "sensor": "sar",
+        "bands": 2,
+        "band_names": [
+          "vv",
+          "vh"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-1 GRD (synthetic)",
+        "looks": 4,
+        "polarisation": "VV+VH",
+        "role": "sar"
+      }
+    ],
+    "georeferenced": true,
+    "sensors": [
+      "optical",
+      "sar"
+    ]
+  },
+  "elapsed_ms": 277.3,
+  "version": "0.4.0",
+  "engine": "neural+classical",
+  "run_id": "run-20260923T072038-887d48",
+  "created": "2026-09-23T07:20:38Z",
+  "precomputed": true
+}

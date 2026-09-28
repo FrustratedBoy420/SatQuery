@@ -1,0 +1,127 @@
+{
+  "query": "What changed between these two dates?",
+  "answer": "This question needs a bi-temporal pair, but one image was supplied. Upload an image for T1 and an image for T2 \u2014 two dates of the same area.",
+  "refused": true,
+  "abstained": false,
+  "confidence": 0.0,
+  "task": "temporal_change",
+  "tools": [],
+  "params": {},
+  "evidence": {
+    "threshold": 0.45,
+    "confidence": 0.0,
+    "abstain": false,
+    "count": 0,
+    "passing": 0,
+    "items": []
+  },
+  "geojson": {
+    "type": "FeatureCollection",
+    "crs": {
+      "type": "name",
+      "properties": {
+        "name": "EPSG:4326"
+      }
+    },
+    "features": []
+  },
+  "trace": [
+    {
+      "step": "Input validated",
+      "detail": "1 raster(s) \u00b7 single",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "rasters": [
+          {
+            "role": "optical",
+            "sensor": "optical",
+            "crs": "EPSG:4326",
+            "bands": 4,
+            "gsd_m": 35.89,
+            "georeferenced": true
+          }
+        ]
+      }
+    },
+    {
+      "step": "Task identified",
+      "detail": "temporal_change \u00b7 matched /changed/",
+      "ok": true,
+      "ms": 0.1,
+      "data": {
+        "confidence": 0.86,
+        "router": "rules"
+      }
+    },
+    {
+      "step": "Compatibility check",
+      "detail": "requires bi_temporal, found single",
+      "ok": false,
+      "ms": 0.1,
+      "data": {}
+    },
+    {
+      "step": "Refused",
+      "detail": "no model invoked",
+      "ok": false,
+      "ms": 0.1,
+      "data": {}
+    }
+  ],
+  "manifest": {
+    "modality": "single",
+    "count": 1,
+    "rasters": [
+      {
+        "source": "kharagpur_optical.tif",
+        "sensor": "optical",
+        "bands": 4,
+        "band_names": [
+          "red",
+          "green",
+          "blue",
+          "nir"
+        ],
+        "width": 512,
+        "height": 512,
+        "crs": "EPSG:4326",
+        "georeferenced": true,
+        "geotransform": [
+          85.24,
+          0.0003515625,
+          0.0,
+          23.5,
+          0.0,
+          -0.0003515625
+        ],
+        "crs_kind": "geographic",
+        "gsd_m": 35.89,
+        "bounds": [
+          85.24,
+          23.32,
+          85.42,
+          23.5
+        ],
+        "centre": [
+          23.41,
+          85.33
+        ],
+        "acquired": "2024-01-15T05:42:00Z",
+        "platform": "Sentinel-2 (synthetic)",
+        "cloud_pct": 5.4,
+        "role": "optical"
+      }
+    ],
+    "georeferenced": true,
+    "sensors": [
+      "optical"
+    ]
+  },
+  "elapsed_ms": 0.2,
+  "version": "0.4.0",
+  "engine": "classical",
+  "run_id": "run-20260923T071704-d57a45",
+  "created": "2026-09-23T07:17:04Z",
+  "precomputed": false
+}
